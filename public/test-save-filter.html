@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار فلتر الحفظ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            direction: rtl;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .test-section {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1f2937;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); }
+        .offline-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        .log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .online { background: #d1fae5; color: #065f46; }
+        .offline { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 اختبار فلتر منع الحفظ في وضع عدم الاتصال</h1>
+        
+        <div class="status" id="connectionStatus">⏳ فحص حالة الاتصال...</div>
+        
+        <div class="test-section">
+            <h3>🎯 محاكاة الحفظ بدون فلاتر</h3>
+            <p>هذا الاختبار يتجاوز جميع الفلاتر ويحفظ مباشرة</p>
+            <button class="btn" onclick="testSaveWithoutFilters()">💾 حفظ بدون فلاتر</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>⚠️ اختبار الفلاتر</h3>
+            <button class="btn" onclick="testTemplateFilter()">🔍 اختبار فلتر القوالب</button>
+            <button class="btn" onclick="testRatingFilter()">⭐ اختبار فلتر التقييمات</button>
+            <button class="btn" onclick="testOfflineDetection()">📱 اختبار كشف عدم الاتصال</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔄 محاكاة الحالات</h3>
+            <button class="btn offline-btn" onclick="forceOfflineMode()">📵 فرض وضع عدم الاتصال</button>
+            <button class="btn" onclick="restoreOnlineMode()">🌐 استعادة وضع الاتصال</button>
+        </div>
+        
+        <button class="btn" onclick="clearLog()">🗑️ مسح السجل</button>
+        
+        <div class="log" id="log">📝 سجل اختبار الفلاتر:\n</div>
+    </div>
+
+    <script>
+        let isOfflineForced = false;
+
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('ar-EG');
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(message);
+        }
+
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const actuallyOffline = isOfflineForced || !navigator.onLine;
+            
+            if (actuallyOffline) {
+                statusEl.className = 'status offline';
+                statusEl.textContent = '❌ غير متصل (مفروض: ' + isOfflineForced + ')';
+            } else {
+                statusEl.className = 'status online';
+                statusEl.textContent = '✅ متصل بالإنترنت';
+            }
+        }
+
+        function testSaveWithoutFilters() {
+            log('🔥 اختبار الحفظ بدون فلاتر...');
+            
+            const actuallyOffline = isOfflineForced || !navigator.onLine;
+            log('📱 حالة الاتصال: ' + (actuallyOffline ? 'غير متصل' : 'متصل'));
+            
+            if (actuallyOffline) {
+                log('✅ تجاوز جميع الفلاتر - حفظ مباشر');
+                
+                // محاكاة بيانات التقييم
+                const evaluationData = {
+                    locationId: 1,
+                    userId: 4,
+                    evaluationDate: new Date().toISOString().split('T')[0],
+                    tasks: [
+                        { templateId: 1, rating: 3, notes: 'تجربة بدون فلاتر', subTaskRatings: [] }
+                    ]
+                };
+                
+                log('📝 بيانات التقييم: ' + JSON.stringify(evaluationData, null, 2));
+                
+                // محاولة الحفظ المباشر
+                try {
+                    const evaluationId = `no_filter_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+                    
+                    const evaluation = {
+                        ...evaluationData,
+                        id: evaluationId,
+                        timestamp: Date.now(),
+                        synced: false,
+                        saved_method: 'no_filters'
+                    };
+                    
+                    // حفظ في localStorage
+                    let existing = [];
+                    try {
+                        const existingData = localStorage.getItem('offline_evaluations');
+                        existing = existingData ? JSON.parse(existingData) : [];
+                    } catch (e) {
+                        existing = [];
+                    }
+                    
+                    existing.push(evaluation);
+                    localStorage.setItem('offline_evaluations', JSON.stringify(existing));
+                    
+                    log('✅ تم الحفظ بنجاح بدون فلاتر: ' + evaluationId);
+                    log('📊 إجمالي التقييمات: ' + existing.length);
+                    
+                } catch (error) {
+                    log('❌ فشل في الحفظ: ' + error.message);
+                }
+                
+            } else {
+                log('⚠️ في الوضع المتصل - سيتم تطبيق الفلاتر العادية');
+            }
+        }
+
+        function testTemplateFilter() {
+            log('🔍 اختبار فلتر القوالب...');
+            
+            // محاكاة عدم وجود قوالب
+            const templates = null;
+            
+            if (!templates || templates.length === 0) {
+                log('❌ فلتر القوالب: لم يتم تحميل قوائم التنظيف');
+                log('🚫 سيتم منع الحفظ بسبب فلتر القوالب');
+            } else {
+                log('✅ فلتر القوالب: تم تحميل القوالب بنجاح');
+            }
+        }
+
+        function testRatingFilter() {
+            log('⭐ اختبار فلتر التقييمات...');
+            
+            // محاكاة مهام بدون تقييمات
+            const tasks = [
+                { templateId: 1, rating: 0 },
+                { templateId: 2, rating: 0 }
+            ];
+            
+            const hasRatings = tasks.some(task => task.rating && task.rating > 0);
+            
+            if (!hasRatings) {
+                log('❌ فلتر التقييمات: لا توجد تقييمات');
+                log('🚫 سيتم منع الحفظ بسبب فلتر التقييمات');
+            } else {
+                log('✅ فلتر التقييمات: توجد تقييمات صالحة');
+            }
+        }
+
+        function testOfflineDetection() {
+            log('📱 اختبار كشف عدم الاتصال...');
+            
+            const navigatorOnline = navigator.onLine;
+            const forcedOffline = isOfflineForced;
+            const actuallyOffline = forcedOffline || !navigatorOnline;
+            
+            log('🌐 navigator.onLine: ' + navigatorOnline);
+            log('📵 مفروض عدم الاتصال: ' + forcedOffline);
+            log('📱 الحالة النهائية: ' + (actuallyOffline ? 'غير متصل' : 'متصل'));
+            
+            if (actuallyOffline) {
+                log('✅ تم كشف عدم الاتصال - سيتم تجاوز الفلاتر');
+            } else {
+                log('⚠️ في الوضع المتصل - سيتم تطبيق الفلاتر');
+            }
+        }
+
+        function forceOfflineMode() {
+            isOfflineForced = true;
+            log('📵 تم فرض وضع عدم الاتصال');
+            updateConnectionStatus();
+        }
+
+        function restoreOnlineMode() {
+            isOfflineForced = false;
+            log('🌐 تم استعادة وضع الاتصال');
+            updateConnectionStatus();
+        }
+
+        function clearLog() {
+            document.getElementById('log').textContent = '📝 سجل اختبار الفلاتر:\n';
+        }
+
+        // الأحداث
+        window.addEventListener('online', () => {
+            log('🌐 تم استعادة الاتصال الفعلي');
+            updateConnectionStatus();
+        });
+
+        window.addEventListener('offline', () => {
+            log('📱 انقطع الاتصال الفعلي');
+            updateConnectionStatus();
+        });
+
+        // التهيئة
+        log('✅ تم تحميل صفحة اختبار فلتر الحفظ');
+        updateConnectionStatus();
+        
+        setTimeout(() => {
+            log('ℹ️ جاهز لاختبار الفلاتر - استخدم الأزرار أعلاه');
+            log('📋 الهدف: التأكد من تجاوز الفلاتر في وضع عدم الاتصال');
+        }, 500);
+    </script>
+</body>
+</html>

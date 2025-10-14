@@ -1,0 +1,13 @@
+<svg width="120" height="140" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background rounded rectangle -->
+  <rect x="4" y="4" width="112" height="92" rx="8" ry="8" fill="#1a1a1a" stroke="#fbbf24" stroke-width="2"/>
+  
+  <!-- Yellow flowing lines -->
+  <path d="M15 25 Q35 15, 55 25 T95 35 Q105 40, 105 50 L105 70 Q95 80, 75 75 T35 65 Q25 60, 25 50 Z" fill="#fbbf24"/>
+  <path d="M20 45 Q40 35, 60 45 T100 55 Q110 60, 110 70 L110 85 Q100 90, 80 87 T40 80 Q30 75, 30 65 Z" fill="#fbbf24"/>
+  <path d="M25 65 Q45 55, 65 65 T105 75 Q115 80, 105 85 L85 90 Q75 85, 55 87 T25 82 Q15 77, 25 72 Z" fill="#fbbf24"/>
+  
+  <!-- HSA Text -->
+  <text x="60" y="115" text-anchor="middle" fill="#1a1a1a" font-family="Arial, sans-serif" font-size="24" font-weight="bold">HSA</text>
+  <circle cx="115" cy="115" r="2" fill="#1a1a1a"/>
+</svg>

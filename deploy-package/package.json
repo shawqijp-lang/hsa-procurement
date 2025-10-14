@@ -1,0 +1,11 @@
+{
+  "name": "hsa-procurement-system",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

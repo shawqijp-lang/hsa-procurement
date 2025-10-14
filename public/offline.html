@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFD700">
+  <title>HSA EVALUATE - وضع بدون اتصال</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body {
+      font-family: 'IBM Plex Sans Arabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* خلفية متحركة */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+      animation: backgroundMove 10s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+    
+    @keyframes backgroundMove {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      100% { transform: translate(-20px, -20px) rotate(1deg); }
+    }
+    
+    .offline-container {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px 30px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      animation: containerFadeIn 1s ease-out;
+      position: relative;
+    }
+    
+    @keyframes containerFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .app-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 25px;
+      background: linear-gradient(135deg, #FFD700, #FFC000);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+      color: #000;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+      animation: iconPulse 2s ease-in-out infinite;
+      position: relative;
+    }
+    
+    @keyframes iconPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    .app-icon::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      background: linear-gradient(135deg, #FFD700, #FFC000);
+      border-radius: 25px;
+      opacity: 0.3;
+      z-index: -1;
+      animation: iconGlow 3s ease-in-out infinite;
+    }
+    
+    @keyframes iconGlow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+    
+    .offline-title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #FFD700;
+      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .offline-subtitle {
+      font-size: 16px;
+      margin-bottom: 25px;
+      color: #ccc;
+      opacity: 0.9;
+    }
+    
+    .offline-message {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #bbb;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 215, 0, 0.08);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+    
+    .offline-message p {
+      margin-bottom: 10px;
+    }
+    
+    .offline-message p:last-child {
+      margin-bottom: 0;
+      font-weight: 600;
+      color: #FFD700;
+    }
+    
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    
+    .retry-btn {
+      background: linear-gradient(135deg, #FFD700, #FFC000);
+      color: #000;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .retry-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .retry-btn:hover::before {
+      left: 100%;
+    }
+    
+    .retry-btn:hover {
+      background: linear-gradient(135deg, #FFC000, #FFB000);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+    }
+    
+    .login-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFD700;
+      border: 2px solid #FFD700;
+      padding: 12px 30px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .login-btn:hover {
+      background: rgba(255, 215, 0, 0.2);
+      transform: translateY(-1px);
+    }
+    
+    .status-indicator {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 13px;
+      background: rgba(0, 255, 0, 0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      color: #90EE90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .status-offline {
+      background: rgba(255, 165, 0, 0.1);
+      border-color: rgba(255, 165, 0, 0.3);
+      color: #FFA500;
+    }
+    
+    .connection-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .connection-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #90EE90;
+      animation: statusPulse 2s ease-in-out infinite;
+    }
+    
+    .connection-dot.offline {
+      background: #FFA500;
+    }
+    
+    @keyframes statusPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    
+    /* أنماط نموذج تسجيل الدخول المحلي */
+    .offline-login-form {
+      background: rgba(255, 215, 0, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      margin-bottom: 20px;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    
+    .login-header h3 {
+      color: #FFD700;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    
+    .login-subtitle {
+      color: #ccc;
+      font-size: 14px;
+      margin: 0;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      color: #FFD700;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-align: right;
+    }
+    
+    .form-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 8px;
+      padding: 12px 15px;
+      color: white;
+      font-size: 14px;
+      text-align: right;
+      direction: rtl;
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: #FFD700;
+      box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    }
+    
+    .login-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .offline-login-btn {
+      background: linear-gradient(135deg, #FFD700, #FFC000);
+      color: #000;
+      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    }
+    
+    .offline-login-btn:hover {
+      background: linear-gradient(135deg, #FFC000, #FFB000);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+    }
+    
+    .back-to-options-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFD700;
+      border: 1px solid rgba(255, 215, 0, 0.5);
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .back-to-options-btn:hover {
+      background: rgba(255, 215, 0, 0.1);
+    }
+    
+    .offline-notice {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+    
+    .offline-notice p {
+      margin: 0;
+    }
+
+    /* للأجهزة المحمولة */
+    @media (max-width: 480px) {
+      .offline-container {
+        padding: 30px 20px;
+        margin: 10px;
+      }
+      
+      .app-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 35px;
+      }
+      
+      .offline-title {
+        font-size: 24px;
+      }
+      
+      .offline-message {
+        font-size: 14px;
+        padding: 15px;
+      }
+      
+      .offline-login-form {
+        padding: 20px 15px;
+      }
+      
+      .login-header h3 {
+        font-size: 18px;
+      }
+      
+      .form-input {
+        padding: 10px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="app-icon">📊</div>
+    <h1 class="offline-title">HSA EVALUATE</h1>
+    <p class="offline-subtitle">نظام تقييم بيئة العمل</p>
+    
+    <!-- شاشة تسجيل الدخول المحلية مع بيانات آخر تسجيل -->
+    <div id="offline-login-form" class="offline-login-form" style="display: none;">
+      <div class="login-header">
+        <h3>🔓 تسجيل الدخول المحلي</h3>
+        <p class="login-subtitle">استخدم بياناتك المحفوظة للعمل بدون اتصال</p>
+      </div>
+      
+      <div class="form-group">
+        <label for="offline-username">اسم المستخدم</label>
+        <input type="text" id="offline-username" class="form-input" readonly>
+      </div>
+      
+      <div class="form-group">
+        <label for="offline-company">الشركة</label>
+        <input type="text" id="offline-company" class="form-input" readonly>
+      </div>
+      
+      <div class="form-group">
+        <label for="offline-role">الدور</label>
+        <input type="text" id="offline-role" class="form-input" readonly>
+      </div>
+      
+      <div class="login-actions">
+        <button class="offline-login-btn" onclick="loginOffline()">
+          🚀 دخول بدون اتصال
+        </button>
+        <button class="back-to-options-btn" onclick="showOfflineOptions()">
+          ← العودة للخيارات
+        </button>
+      </div>
+      
+      <div class="offline-notice">
+        <p>📱 ستتم مزامنة جميع بياناتك عند الاتصال</p>
+      </div>
+    </div>
+
+    <div id="offline-options" class="offline-message">
+      <p>🔓 التطبيق جاهز للعمل بدون اتصال</p>
+      <p id="saved-user-info">📱 يمكنك تسجيل الدخول باستخدام بياناتك المحفوظة</p>
+      <p>💾 جميع تقييماتك ستُحفظ محلياً وستُزامن عند الاتصال</p>
+    </div>
+    
+    <div id="action-buttons" class="action-buttons">
+      <button class="retry-btn" onclick="handleRetry()">
+        🔄 محاولة الاتصال مرة أخرى
+      </button>
+      <button class="login-btn" onclick="showOfflineLogin()" id="offline-login-btn">
+        🚪 تسجيل دخول محلي
+      </button>
+    </div>
+    
+    <div id="status" class="status-indicator status-offline">
+      <div class="connection-status">
+        <div class="connection-dot offline" id="statusDot"></div>
+        <span id="statusText">لا يتوفر اتصال بالإنترنت</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // متغيرات العنوان
+    const statusElement = document.getElementById('status');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    
+    // متغيرات نموذج تسجيل الدخول المحلي
+    const offlineLoginForm = document.getElementById('offline-login-form');
+    const offlineOptions = document.getElementById('offline-options');
+    const actionButtons = document.getElementById('action-buttons');
+    const savedUserInfo = document.getElementById('saved-user-info');
+    
+    // بيانات آخر تسجيل محفوظة
+    let lastLoginData = null;
+    
+    // IndexedDB للنظام الموحد
+    let indexedDBConnection = null;
+    
+    // ربط بـ IndexedDB الموحد
+    async function connectToIndexedDB() {
+      if (indexedDBConnection) return indexedDBConnection;
+      
+      try {
+        const request = indexedDB.open('HSAGroupDB', 1);
+        
+        return new Promise((resolve, reject) => {
+          request.onerror = () => reject(request.error);
+          request.onsuccess = () => {
+            indexedDBConnection = request.result;
+            resolve(indexedDBConnection);
+          };
+          request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains('storage')) {
+              const store = db.createObjectStore('storage', { keyPath: 'id' });
+              store.createIndex('type', 'type', { unique: false });
+            }
+          };
+        });
+      } catch (error) {
+        console.warn('⚠️ فشل الاتصال بـ IndexedDB:', error);
+        return null;
+      }
+    }
+    
+    // استرجاع بيانات من IndexedDB الموحد
+    async function getFromIndexedDB(key) {
+      try {
+        const db = await connectToIndexedDB();
+        if (!db) return null;
+        
+        const transaction = db.transaction(['storage'], 'readonly');
+        const store = transaction.objectStore('storage');
+        const request = store.get(key);
+        
+        return new Promise((resolve) => {
+          request.onsuccess = () => {
+            const result = request.result;
+            resolve(result ? result.value : null);
+          };
+          request.onerror = () => resolve(null);
+        });
+      } catch (error) {
+        console.warn('⚠️ خطأ في قراءة IndexedDB:', error);
+        return null;
+      }
+    }
+    
+    // حفظ بيانات في IndexedDB الموحد 
+    async function saveToIndexedDB(key, value, type = 'data') {
+      try {
+        const db = await connectToIndexedDB();
+        if (!db) return false;
+        
+        const transaction = db.transaction(['storage'], 'readwrite');
+        const store = transaction.objectStore('storage');
+        
+        const data = {
+          id: key,
+          value: value,
+          timestamp: Date.now(),
+          type: type
+        };
+        
+        store.put(data);
+        
+        return new Promise((resolve) => {
+          transaction.oncomplete = () => resolve(true);
+          transaction.onerror = () => resolve(false);
+        });
+      } catch (error) {
+        console.warn('⚠️ خطأ في كتابة IndexedDB:', error);
+        return false;
+      }
+    }
+    
+    // تحميل بيانات آخر تسجيل دخول بطريقة مقاومة للحذف
+    async function loadLastLoginData() {
+      try {
+        console.log('📱 تحميل بيانات آخر تسجيل دخول بنظام استرجاع متعدد المستويات...');
+        
+        // نظام استرجاع متعدد المستويات - من مصادر مختلفة
+        let userData = null;
+        let authToken = null;
+        
+        // المستوى الأول: IndexedDB الموحد (المصدر الأساسي)
+        userData = await getFromIndexedDB('auth_user') || await getFromIndexedDB('user_data');
+        authToken = await getFromIndexedDB('auth_token');
+        
+        // المستوى الثاني: localStorage كنسخة احتياطية
+        if (!userData || !authToken) {
+          console.log('📁 IndexedDB فارغ، محاولة استرجاع من localStorage...');
+          try {
+            userData = userData || JSON.parse(localStorage.getItem('auth_user') || 'null');
+            authToken = authToken || localStorage.getItem('auth_token');
+          } catch (e) {
+            console.warn('⚠️ خطأ في قراءة localStorage:', e);
+          }
+        }
+        
+        // المستوى الثالث: محاولة استرجاع من مفاتيح بديلة
+        if (!userData) {
+          const alternativeKeys = ['user_profile', 'current_user', 'authenticated_user', 'session_user'];
+          for (const key of alternativeKeys) {
+            userData = await getFromIndexedDB(key);
+            if (userData) {
+              console.log(`✅ تم العثور على بيانات المستخدم من مفتاح بديل: ${key}`);
+              break;
+            }
+          }
+        }
+        
+        // معالجة البيانات إذا كانت JSON string
+        let processedUserData = userData;
+        if (typeof userData === 'string') {
+          try {
+            processedUserData = JSON.parse(userData);
+          } catch (e) {
+            console.warn('⚠️ خطأ في تحليل بيانات المستخدم:', e);
+            processedUserData = null;
+          }
+        }
+        
+        if (processedUserData && typeof processedUserData === 'object') {
+          lastLoginData = processedUserData;
+          console.log('✅ تم العثور على بيانات المستخدم المحفوظة:', processedUserData.username);
+          
+          // تحديث النص التوضيحي
+          savedUserInfo.textContent = `👤 مرحباً ${processedUserData.fullName || processedUserData.username} - يمكنك الدخول بدون اتصال`;
+          
+          return true;
+        } else {
+          console.log('ℹ️ لا توجد بيانات مستخدم محفوظة');
+          savedUserInfo.textContent = '📱 لا توجد بيانات محفوظة - قم بتسجيل الدخول عبر الإنترنت أولاً';
+          
+          // إخفاء زر تسجيل الدخول المحلي
+          const offlineLoginBtn = document.getElementById('offline-login-btn');
+          if (offlineLoginBtn) {
+            offlineLoginBtn.style.display = 'none';
+          }
+          
+          return false;
+        }
+      } catch (error) {
+        console.warn('⚠️ خطأ في تحميل بيانات آخر تسجيل:', error);
+        return false;
+      }
+    }
+    
+    // عرض نموذج تسجيل الدخول المحلي
+    async function showOfflineLogin() {
+      if (!lastLoginData) {
+        alert('لا توجد بيانات محفوظة. يرجى تسجيل الدخول عبر الإنترنت أولاً.');
+        return;
+      }
+      
+      console.log('🔓 عرض شاشة تسجيل الدخول المحلي');
+      
+      // ملء النموذج ببيانات آخر تسجيل
+      document.getElementById('offline-username').value = lastLoginData.username || '';
+      document.getElementById('offline-company').value = getCompanyDisplayName(lastLoginData.companyId);
+      document.getElementById('offline-role').value = getRoleDisplayName(lastLoginData.role);
+      
+      // إخفاء الخيارات وعرض النموذج
+      offlineOptions.style.display = 'none';
+      actionButtons.style.display = 'none';
+      offlineLoginForm.style.display = 'block';
+    }
+    
+    // العودة للخيارات
+    function showOfflineOptions() {
+      console.log('← العودة للخيارات');
+      
+      offlineLoginForm.style.display = 'none';
+      offlineOptions.style.display = 'block';
+      actionButtons.style.display = 'flex';
+    }
+    
+    // تسجيل الدخول المحلي مع نظام حفظ مقاوم للحذف
+    async function loginOffline() {
+      if (!lastLoginData) {
+        alert('خطأ: لا توجد بيانات محفوظة');
+        return;
+      }
+      
+      console.log('🚀 تسجيل دخول محلي مع نظام الحفظ المقاوم لـ:', lastLoginData.username);
+      
+      try {
+        const loginTime = Date.now();
+        const offlineSession = {
+          active: true,
+          user: lastLoginData,
+          loginTime: loginTime,
+          sessionId: `offline_${loginTime}`,
+          persistent: true
+        };
+        
+        // حفظ متعدد المستويات لضمان البقاء
+        const savePromises = [
+          // IndexedDB الموحد (المصدر الأساسي)
+          saveToIndexedDB('offline_login_active', true, 'auth'),
+          saveToIndexedDB('offline_login_user', lastLoginData, 'auth'),
+          saveToIndexedDB('offline_session', offlineSession, 'auth'),
+          
+          // نسخ إضافية بمفاتيح مختلفة للأمان
+          saveToIndexedDB('current_offline_session', offlineSession, 'backup'),
+          saveToIndexedDB('persistent_user_session', lastLoginData, 'persistent'),
+        ];
+        
+        // localStorage كنسخة احتياطية
+        try {
+          localStorage.setItem('offline_login_active', 'true');
+          localStorage.setItem('offline_login_user', JSON.stringify(lastLoginData));
+          localStorage.setItem('offline_session', JSON.stringify(offlineSession));
+          localStorage.setItem('offline_session_backup', JSON.stringify(offlineSession));
+        } catch (e) {
+          console.warn('⚠️ فشل في حفظ localStorage:', e);
+        }
+        
+        // انتظار حفظ جميع البيانات
+        await Promise.all(savePromises);
+        console.log('💾 تم حفظ بيانات الجلسة المحلية في مستويات متعددة');
+        
+        // تأثير بصري
+        const loginBtn = document.querySelector('.offline-login-btn');
+        loginBtn.style.opacity = '0.6';
+        loginBtn.textContent = '⏳ جاري تسجيل الدخول...';
+        
+        // انتظار قصير ثم إعادة التوجيه
+        setTimeout(() => {
+          console.log('✅ تم تسجيل الدخول المحلي، إعادة التوجيه للتطبيق');
+          window.location.href = '/';
+        }, 1500);
+        
+      } catch (error) {
+        console.error('❌ خطأ في تسجيل الدخول المحلي:', error);
+        alert('حدث خطأ أثناء تسجيل الدخول المحلي');
+      }
+    }
+    
+    // تحويل معرف الشركة إلى اسم عرض
+    function getCompanyDisplayName(companyId) {
+      const companies = {
+        1: 'الشؤون الإدارية الإدارة العامة',
+        2: 'قالب الشركات الجديدة',
+        6: 'الالبان و الاغذية الوطنية المحدودة الحديدة',
+        7: 'الشركة اليمنية للمطاحن و صوامع الغلال الحديدة',
+        9: 'الشركة اليمنية لتكرير السكر'
+      };
+      return companies[companyId] || `شركة رقم ${companyId}`;
+    }
+    
+    // تحويل الدور إلى اسم عرض
+    function getRoleDisplayName(role) {
+      const roles = {
+        'admin': 'مدير',
+        'supervisor': 'مشرف',
+        'user': 'مستخدم',
+        'enhanced_general_manager': 'مدير بيئة العمل',
+        'analytics_viewer': 'محلل البيانات'
+      };
+      return roles[role] || role;
+    }
+    
+    // تحديث حالة الاتصال
+    function updateConnectionStatus() {
+      if (navigator.onLine) {
+        statusElement.className = 'status-indicator';
+        statusDot.className = 'connection-dot';
+        statusText.textContent = 'متصل - جاهز للمزامنة';
+        
+        // إعادة توجيه تلقائي عند الاتصال
+        setTimeout(() => {
+          console.log('🌐 Network restored, redirecting to main app...');
+          window.location.href = '/';
+        }, 1500);
+      } else {
+        statusElement.className = 'status-indicator status-offline';
+        statusDot.className = 'connection-dot offline';
+        statusText.textContent = 'لا يتوفر اتصال بالإنترنت';
+      }
+    }
+    
+    // معالج زر إعادة المحاولة
+    function handleRetry() {
+      console.log('🔄 Attempting to reconnect...');
+      updateConnectionStatus();
+      
+      if (navigator.onLine) {
+        window.location.href = '/';
+      } else {
+        // تأثير بصري للمحاولة
+        const retryBtn = document.querySelector('.retry-btn');
+        retryBtn.style.opacity = '0.6';
+        retryBtn.textContent = '⏳ جاري المحاولة...';
+        
+        setTimeout(() => {
+          retryBtn.style.opacity = '1';
+          retryBtn.textContent = '🔄 محاولة الاتصال مرة أخرى';
+        }, 2000);
+      }
+    }
+    
+    // مراقبة تغييرات الاتصال
+    window.addEventListener('online', () => {
+      console.log('🌐 Network connection restored');
+      updateConnectionStatus();
+    });
+    
+    window.addEventListener('offline', () => {
+      console.log('📶 Network connection lost');
+      updateConnectionStatus();
+    });
+    
+    // تهيئة الصفحة
+    async function initializePage() {
+      console.log('📱 HSA EVALUATE Offline Page Loading...');
+      
+      // تحميل بيانات آخر تسجيل
+      await loadLastLoginData();
+      
+      // فحص أولي للاتصال
+      updateConnectionStatus();
+      
+      console.log('✅ HSA EVALUATE Offline Page Ready');
+    }
+    
+    // فحص دوري للاتصال
+    setInterval(updateConnectionStatus, 5000);
+    
+    // تشغيل التهيئة
+    initializePage();
+  </script>
+</body>
+</html>

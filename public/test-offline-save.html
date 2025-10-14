@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الحفظ دون اتصال</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            direction: rtl;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .status-card {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .online { background: #d1fae5; color: #065f46; border: 2px solid #10b981; }
+        .offline { background: #fee2e2; color: #991b1b; border: 2px solid #ef4444; }
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1f2937;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .info-card {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .counter {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 اختبار نظام الحفظ المحلي</h1>
+        
+        <div class="status-card" id="connectionStatus">⏳ فحص حالة الاتصال...</div>
+        
+        <div class="counter" id="pendingCounter">
+            التقييمات المعلقة: <span id="pendingCount">0</span>
+        </div>
+        
+        <button class="btn" onclick="simulateOfflineEvaluation()">💾 محاكاة تقييم محلي</button>
+        <button class="btn" onclick="testAutoSync()" id="syncBtn">🔄 اختبار المزامنة التلقائية</button>
+        <button class="btn" onclick="showPendingEvaluations()">📋 عرض التقييمات المعلقة</button>
+        <button class="btn" onclick="clearOfflineData()">🗑️ مسح البيانات المحلية</button>
+        <button class="btn" onclick="toggleConnection()" id="connectionBtn">📶 قطع/وصل الاتصال</button>
+        
+        <div class="info-card">
+            <strong>كيفية الاختبار:</strong><br>
+            1. اضغط "محاكاة تقييم محلي" لحفظ تقييم محلياً<br>
+            2. اقطع الاتصال وجرب حفظ تقييمات أخرى<br>
+            3. أعد الاتصال لمشاهدة المزامنة التلقائية<br>
+            4. راقب العداد والسجل لمتابعة العملية
+        </div>
+        
+        <div class="log" id="log">📝 سجل النشاط:\n</div>
+    </div>
+
+    <script>
+        let isOnline = navigator.onLine;
+        let evaluationCounter = 1;
+
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('ar-EG');
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(message);
+        }
+
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const btnEl = document.getElementById('connectionBtn');
+            const syncBtnEl = document.getElementById('syncBtn');
+            
+            if (isOnline) {
+                statusEl.className = 'status-card online';
+                statusEl.textContent = '✅ متصل بالإنترنت';
+                btnEl.textContent = '📱 قطع الاتصال (محاكاة)';
+                syncBtnEl.disabled = false;
+            } else {
+                statusEl.className = 'status-card offline';
+                statusEl.textContent = '❌ غير متصل بالإنترنت';
+                btnEl.textContent = '📶 إعادة الاتصال';
+                syncBtnEl.disabled = true;
+            }
+            updatePendingCounter();
+        }
+
+        function updatePendingCounter() {
+            try {
+                const data = localStorage.getItem('offline_evaluations');
+                const evaluations = data ? JSON.parse(data) : [];
+                const pending = evaluations.filter(eval => !eval.synced);
+                
+                document.getElementById('pendingCount').textContent = pending.length;
+                
+                if (pending.length > 0) {
+                    document.getElementById('pendingCounter').style.background = '#fecaca';
+                    document.getElementById('pendingCounter').style.borderColor = '#ef4444';
+                } else {
+                    document.getElementById('pendingCounter').style.background = '#d1fae5';
+                    document.getElementById('pendingCounter').style.borderColor = '#10b981';
+                }
+            } catch (error) {
+                log('❌ خطأ في تحديث العداد: ' + error.message);
+            }
+        }
+
+        function simulateOfflineEvaluation() {
+            try {
+                const evaluation = {
+                    id: `test_${Date.now()}_${evaluationCounter}`,
+                    locationId: Math.floor(Math.random() * 5) + 1,
+                    userId: 4,
+                    evaluationDate: new Date().toISOString().split('T')[0],
+                    tasks: [
+                        {
+                            templateId: 1,
+                            rating: Math.floor(Math.random() * 4) + 1,
+                            notes: `ملاحظة تجريبية ${evaluationCounter}`,
+                            subTaskRatings: []
+                        },
+                        {
+                            templateId: 2,
+                            rating: Math.floor(Math.random() * 4) + 1,
+                            notes: `ملاحظة أخرى ${evaluationCounter}`,
+                            subTaskRatings: []
+                        }
+                    ],
+                    timestamp: Date.now(),
+                    synced: false
+                };
+
+                // حفظ في localStorage
+                const existingData = localStorage.getItem('offline_evaluations');
+                const evaluations = existingData ? JSON.parse(existingData) : [];
+                evaluations.push(evaluation);
+                localStorage.setItem('offline_evaluations', JSON.stringify(evaluations));
+
+                log(`✅ تم حفظ تقييم تجريبي رقم ${evaluationCounter} محلياً`);
+                log(`📊 معرف التقييم: ${evaluation.id}`);
+                log(`📍 موقع: ${evaluation.locationId}, مهام: ${evaluation.tasks.length}`);
+                
+                evaluationCounter++;
+                updatePendingCounter();
+                
+                if (isOnline && Math.random() > 0.3) {
+                    setTimeout(() => {
+                        log('🔄 محاكاة مزامنة تلقائية...');
+                        simulateAutoSync();
+                    }, 2000);
+                }
+                
+            } catch (error) {
+                log('❌ فشل في حفظ التقييم: ' + error.message);
+            }
+        }
+
+        function simulateAutoSync() {
+            if (!isOnline) {
+                log('⚠️ لا يمكن المزامنة - غير متصل');
+                return;
+            }
+
+            try {
+                const data = localStorage.getItem('offline_evaluations');
+                if (!data) {
+                    log('ℹ️ لا توجد تقييمات للمزامنة');
+                    return;
+                }
+
+                const evaluations = JSON.parse(data);
+                const pendingEvaluations = evaluations.filter(eval => !eval.synced);
+                
+                if (pendingEvaluations.length === 0) {
+                    log('ℹ️ جميع التقييمات متزامنة بالفعل');
+                    return;
+                }
+
+                log(`🔄 بدء مزامنة ${pendingEvaluations.length} تقييم...`);
+                
+                // محاكاة مزامنة تدريجية
+                let syncedCount = 0;
+                pendingEvaluations.forEach((evaluation, index) => {
+                    setTimeout(() => {
+                        // محاكاة نجاح المزامنة (90% نجاح)
+                        const success = Math.random() > 0.1;
+                        
+                        if (success) {
+                            // تحديث حالة المزامنة
+                            const allEvaluations = JSON.parse(localStorage.getItem('offline_evaluations') || '[]');
+                            const updatedEvaluations = allEvaluations.map(eval => 
+                                eval.id === evaluation.id ? { ...eval, synced: true } : eval
+                            );
+                            localStorage.setItem('offline_evaluations', JSON.stringify(updatedEvaluations));
+                            
+                            syncedCount++;
+                            log(`✅ تم مزامنة التقييم: ${evaluation.id}`);
+                        } else {
+                            log(`❌ فشل في مزامنة التقييم: ${evaluation.id}`);
+                        }
+                        
+                        if (index === pendingEvaluations.length - 1) {
+                            log(`🎉 اكتملت المزامنة: ${syncedCount}/${pendingEvaluations.length} بنجاح`);
+                            updatePendingCounter();
+                            
+                            // تنظيف التقييمات المتزامنة
+                            setTimeout(() => {
+                                cleanupSyncedEvaluations();
+                            }, 1000);
+                        }
+                        
+                        updatePendingCounter();
+                    }, (index + 1) * 800);
+                });
+                
+            } catch (error) {
+                log('❌ خطأ في المزامنة: ' + error.message);
+            }
+        }
+
+        function cleanupSyncedEvaluations() {
+            try {
+                const data = localStorage.getItem('offline_evaluations');
+                if (!data) return;
+                
+                const evaluations = JSON.parse(data);
+                const unsyncedEvaluations = evaluations.filter(eval => !eval.synced);
+                
+                localStorage.setItem('offline_evaluations', JSON.stringify(unsyncedEvaluations));
+                
+                const removedCount = evaluations.length - unsyncedEvaluations.length;
+                if (removedCount > 0) {
+                    log(`🗑️ تم تنظيف ${removedCount} تقييم متزامن`);
+                }
+                
+                updatePendingCounter();
+            } catch (error) {
+                log('❌ خطأ في التنظيف: ' + error.message);
+            }
+        }
+
+        function testAutoSync() {
+            log('🧪 اختبار المزامنة التلقائية...');
+            simulateAutoSync();
+        }
+
+        function showPendingEvaluations() {
+            try {
+                const data = localStorage.getItem('offline_evaluations');
+                if (!data) {
+                    log('📋 لا توجد تقييمات محفوظة');
+                    return;
+                }
+
+                const evaluations = JSON.parse(data);
+                const pending = evaluations.filter(eval => !eval.synced);
+                const synced = evaluations.filter(eval => eval.synced);
+                
+                log('📋 === تقرير التقييمات ===');
+                log(`📊 إجمالي التقييمات: ${evaluations.length}`);
+                log(`⏳ معلقة: ${pending.length}`);
+                log(`✅ متزامنة: ${synced.length}`);
+                
+                if (pending.length > 0) {
+                    log('--- التقييمات المعلقة ---');
+                    pending.forEach((eval, index) => {
+                        const date = new Date(eval.timestamp).toLocaleString('ar-EG');
+                        log(`${index + 1}. ${eval.id} - موقع: ${eval.locationId} - ${date}`);
+                    });
+                }
+                
+            } catch (error) {
+                log('❌ خطأ في عرض التقييمات: ' + error.message);
+            }
+        }
+
+        function clearOfflineData() {
+            try {
+                localStorage.removeItem('offline_evaluations');
+                log('🗑️ تم مسح جميع البيانات المحلية');
+                evaluationCounter = 1;
+                updatePendingCounter();
+            } catch (error) {
+                log('❌ خطأ في المسح: ' + error.message);
+            }
+        }
+
+        function toggleConnection() {
+            isOnline = !isOnline;
+            log(isOnline ? '📶 تم إعادة الاتصال بالإنترنت' : '📱 تم قطع الاتصال');
+            updateConnectionStatus();
+            
+            if (isOnline) {
+                // محاكاة المزامنة التلقائية عند عودة الاتصال
+                setTimeout(() => {
+                    const pendingCount = JSON.parse(localStorage.getItem('offline_evaluations') || '[]')
+                        .filter(eval => !eval.synced).length;
+                    
+                    if (pendingCount > 0) {
+                        log('🌐 اكتشاف عودة الاتصال - بدء المزامنة التلقائية...');
+                        simulateAutoSync();
+                    }
+                }, 3000);
+            }
+        }
+
+        // الأحداث
+        window.addEventListener('online', () => {
+            isOnline = true;
+            log('🌐 تم استعادة الاتصال بالشبكة');
+            updateConnectionStatus();
+        });
+
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            log('📱 انقطع الاتصال بالشبكة');
+            updateConnectionStatus();
+        });
+
+        // التهيئة
+        log('✅ تم تحميل نظام اختبار الحفظ المحلي');
+        updateConnectionStatus();
+        updatePendingCounter();
+        
+        // إضافة بعض البيانات التجريبية
+        setTimeout(() => {
+            log('ℹ️ جاهز للاختبار - جرب الأزرار أعلاه');
+        }, 500);
+    </script>
+</body>
+</html>

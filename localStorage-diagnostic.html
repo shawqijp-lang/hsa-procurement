@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فحص localStorage - نظام هائل سعيد أنعم</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+            direction: rtl;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f1c40f;
+            padding-bottom: 20px;
+        }
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #f1c40f;
+        }
+        .key-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+        .exists { color: #2ecc71; }
+        .missing { color: #e74c3c; }
+        .data-preview {
+            background: #2c3e50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .refresh-btn {
+            background: linear-gradient(135deg, #f1c40f 0%, #e67e22 100%);
+            color: #000;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.4);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-box {
+            background: rgba(52, 152, 219, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 فحص localStorage - نظام هائل سعيد أنعم</h1>
+            <p>تشخيص حالة التخزين المحلي والبيانات المحفوظة</p>
+        </div>
+
+        <div class="stats" id="stats">
+            <!-- سيتم ملؤها بالـ JavaScript -->
+        </div>
+
+        <div class="status-card">
+            <h3>🔑 المفاتيح المهمة في النظام:</h3>
+            <div id="important-keys">
+                <!-- سيتم ملؤها بالـ JavaScript -->
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>📦 البيانات الموحدة (HSA Final Unified Storage):</h3>
+            <div id="unified-data">
+                <!-- سيتم ملؤها بالـ JavaScript -->
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>🗂️ جميع المفاتيح الموجودة:</h3>
+            <div id="all-keys">
+                <!-- سيتم ملؤها بالـ JavaScript -->
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="refresh-btn" onclick="checkLocalStorage()">🔄 تحديث الفحص</button>
+            <button class="refresh-btn" onclick="clearOldData()">🧹 تنظيف البيانات القديمة</button>
+            <button class="refresh-btn" onclick="exportData()">📤 تصدير البيانات</button>
+        </div>
+    </div>
+
+    <script>
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function checkLocalStorage() {
+            console.log('🔍 بدء فحص localStorage...');
+            
+            // إحصائيات عامة
+            const keys = Object.keys(localStorage);
+            let totalSize = 0;
+            keys.forEach(key => {
+                totalSize += (localStorage.getItem(key) || '').length;
+            });
+
+            // عرض الإحصائيات
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-box">
+                    <div class="stat-number">${keys.length}</div>
+                    <div>عدد المفاتيح</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${formatBytes(totalSize)}</div>
+                    <div>الحجم الإجمالي</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">${((totalSize / 1024 / 1024) * 100 / 5).toFixed(1)}%</div>
+                    <div>من 5MB المسموح</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">✅</div>
+                    <div>localStorage نشط</div>
+                </div>
+            `;
+
+            // المفاتيح المهمة
+            const importantKeys = [
+                'token', 'auth_token',
+                'user', 'user_data', 
+                'hsa_final_unified_storage',
+                'offlineData',
+                'cached_templates',
+                'dashboard-settings-updated',
+                'hsa_emergency_backup',
+                'unified_migration_complete'
+            ];
+
+            let importantKeysHtml = '';
+            importantKeys.forEach(key => {
+                const exists = localStorage.getItem(key) !== null;
+                const size = exists ? (localStorage.getItem(key) || '').length : 0;
+                const status = exists ? 'exists' : 'missing';
+                const icon = exists ? '✅' : '❌';
+                
+                importantKeysHtml += `
+                    <div class="key-item">
+                        <span class="${status}">${icon} ${key}</span>
+                        <span>${exists ? formatBytes(size) : 'غير موجود'}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('important-keys').innerHTML = importantKeysHtml;
+
+            // البيانات الموحدة
+            const unifiedData = localStorage.getItem('hsa_final_unified_storage');
+            let unifiedHtml = '';
+            
+            if (unifiedData) {
+                try {
+                    const parsed = JSON.parse(unifiedData);
+                    unifiedHtml = `
+                        <div class="key-item">
+                            <span class="exists">✅ البيانات الموحدة موجودة</span>
+                            <span>${formatBytes(unifiedData.length)}</span>
+                        </div>
+                        <div class="data-preview">
+                            <strong>محتويات البيانات الموحدة:</strong><br>
+                            - المستخدم: ${parsed.user ? '✅ موجود' : '❌ غير موجود'}<br>
+                            - الشركات: ${parsed.companies ? `${parsed.companies.length} شركة` : '❌ غير موجود'}<br>
+                            - المواقع: ${parsed.locations ? `${parsed.locations.length} موقع` : '❌ غير موجود'}<br>
+                            - التقييمات المحلية: ${parsed.evaluations ? `${parsed.evaluations.length} تقييم` : '❌ غير موجود'}<br>
+                            - آخر تحديث: ${parsed.lastUpdated || 'غير محدد'}<br>
+                            - حالة المزامنة: ${parsed.syncStatus || 'غير محدد'}
+                        </div>
+                    `;
+                } catch (e) {
+                    unifiedHtml = `
+                        <div class="key-item">
+                            <span class="missing">❌ خطأ في قراءة البيانات الموحدة</span>
+                            <span>${formatBytes(unifiedData.length)}</span>
+                        </div>
+                        <div class="data-preview">خطأ: ${e.message}</div>
+                    `;
+                }
+            } else {
+                unifiedHtml = `
+                    <div class="key-item">
+                        <span class="missing">❌ البيانات الموحدة غير موجودة</span>
+                        <span>قد تحتاج لإعادة تهيئة النظام</span>
+                    </div>
+                `;
+            }
+            document.getElementById('unified-data').innerHTML = unifiedHtml;
+
+            // جميع المفاتيح
+            let allKeysHtml = '';
+            keys.sort().forEach(key => {
+                const size = (localStorage.getItem(key) || '').length;
+                allKeysHtml += `
+                    <div class="key-item">
+                        <span>${key}</span>
+                        <span>${formatBytes(size)}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('all-keys').innerHTML = allKeysHtml || '<p>لا توجد مفاتيح في localStorage</p>';
+        }
+
+        function clearOldData() {
+            if (confirm('هل تريد تنظيف البيانات القديمة؟ هذا قد يحذف بعض البيانات المؤقتة.')) {
+                const oldKeys = ['old_user_data', 'legacy_settings', 'temp_data'];
+                let cleared = 0;
+                
+                oldKeys.forEach(key => {
+                    if (localStorage.getItem(key)) {
+                        localStorage.removeItem(key);
+                        cleared++;
+                    }
+                });
+                
+                alert(`تم تنظيف ${cleared} عنصر من البيانات القديمة`);
+                checkLocalStorage();
+            }
+        }
+
+        function exportData() {
+            const data = {};
+            Object.keys(localStorage).forEach(key => {
+                data[key] = localStorage.getItem(key);
+            });
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `localStorage_backup_${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // تشغيل الفحص عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', checkLocalStorage);
+    </script>
+</body>
+</html>

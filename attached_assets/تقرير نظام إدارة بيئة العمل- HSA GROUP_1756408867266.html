@@ -1,0 +1,4101 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)file:///C:/Users/shawqi.jpry/Downloads/cleaning-report-2025-07-20-to-2025-08-05.html -->
+<html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير نظام إدارة النظافة - HSA GROUP</title>
+    <script src="./تقرير نظام إدارة بيئة العمل- HSA GROUP_files/chart.js.تنزيل"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Amiri', 'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+            direction: rtl;
+        }
+        
+        .report-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .report-header {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a1a1a;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .company-name {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .report-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .report-period {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .report-meta {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .meta-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid #fbbf24;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .meta-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .meta-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .report-content {
+            padding: 30px;
+        }
+        
+        .location-section {
+            margin-bottom: 40px;
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .location-title {
+            background: linear-gradient(135deg, #374151, #1f2937);
+            color: white;
+            padding: 18px 25px;
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .location-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .summary-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .summary-item .label {
+            display: block;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .summary-item .value {
+            display: block;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #f59e0b;
+        }
+        
+        .daily-report {
+            border-top: 1px solid #dee2e6;
+            padding: 20px;
+        }
+        
+        .daily-header {
+            margin-bottom: 20px;
+        }
+        
+        .daily-header h4 {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .daily-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .task-item {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .task-item.completed {
+            background: #dcfce7;
+            border-color: #bbf7d0;
+            border-right: 4px solid #10b981;
+        }
+        
+        .task-item.incomplete {
+            background: #fef2f2;
+            border-color: #fecaca;
+            border-right: 4px solid #ef4444;
+        }
+        
+        .task-category {
+            font-size: 0.8em;
+            color: #666;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        
+        .task-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .task-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+        
+        .completed .status {
+            background: #28a745;
+            color: white;
+        }
+        
+        .incomplete .status {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .rating {
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .evaluation-notes {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .evaluation-notes strong {
+            color: #495057;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .evaluation-notes p {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        /* تنسيق الرسوم البيانية */
+        .charts-section {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #fbbf24;
+        }
+        
+        .charts-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #dee2e6;
+        }
+        
+        .chart-container h5 {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 2px solid #fbbf24;
+            padding-bottom: 10px;
+        }
+        
+        .chart-container canvas {
+            max-height: 300px;
+        }
+        
+        .chart-container.full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .no-data {
+            padding: 40px;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .report-footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #dee2e6;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .report-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .daily-report {
+                page-break-inside: avoid;
+            }
+            
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                max-height: 300px;
+                overflow: hidden;
+            }
+            
+            .location-section {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* تنسيق قسم التحليل والتوصيات */
+        .analysis-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 15px;
+            border: 2px solid #fbbf24;
+        }
+
+        .analysis-title {
+            color: #f59e0b;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            color: #374151;
+            font-size: 1.6em;
+            margin: 30px 0 20px 0;
+            padding: 15px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .performance-summary {
+            margin-bottom: 30px;
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 2px solid #e5e7eb;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-card.excellent {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+
+        .metric-card.good {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .metric-card.needs-improvement {
+            border-color: #ef4444;
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+        }
+
+        .metric-title {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-bottom: 10px;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .metric-status {
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .location-analysis, .task-analysis, .recommendations {
+            margin: 30px 0;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .performance-category {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .excellent-locations {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border-right: 5px solid #10b981;
+        }
+
+        .moderate-locations {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-right: 5px solid #f59e0b;
+        }
+
+        .low-locations {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border-right: 5px solid #ef4444;
+        }
+
+        .insight {
+            background: rgba(255,255,255,0.8);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-style: italic;
+            border-right: 3px solid #6b7280;
+        }
+
+        .problematic-tasks {
+            display: grid;
+            gap: 15px;
+        }
+
+        .task-issue {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            border-right: 4px solid #ef4444;
+        }
+
+        .task-name {
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .task-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9em;
+            color: #6b7280;
+        }
+
+        .recommendation-category {
+            margin: 25px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            border-right: 4px solid #3b82f6;
+        }
+
+        .recommendation-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendation-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .recommendation-list li:last-child {
+            border-bottom: none;
+        }
+
+        .follow-up-plan {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .follow-up-timeline {
+            display: grid;
+            gap: 15px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-period {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+            margin-left: 20px;
+        }
+
+        .timeline-action {
+            flex: 1;
+            color: #374151;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .location-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .daily-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .performance-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .task-stats {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .timeline-period {
+                margin: 0 0 10px 0;
+            }
+        }
+        
+        /* تصميم تحليل الاتجاه الزمني */
+        .trend-analysis {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+            border-radius: 12px;
+            border: 2px solid #d1d5db;
+        }
+
+        .trend-analysis h4 {
+            margin-bottom: 15px;
+            color: #374151;
+            font-size: 1.2em;
+        }
+
+        .trend-indicator {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .trend-indicator.improving {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+            border: 2px solid #10b981;
+        }
+
+        .trend-indicator.declining {
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+            border: 2px solid #ef4444;
+        }
+
+        .trend-indicator.stable {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+            border: 2px solid #f59e0b;
+        }
+
+        .trend-label {
+            font-size: 1.1em;
+        }
+
+        .trend-change {
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        /* تحسين تصميم التوصيات الذكية */
+        .recommendations h3 {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed) !important;
+            color: white !important;
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.3em;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .recommendation-category h4 {
+            background: linear-gradient(135deg, #1f2937, #374151) !important;
+            color: white !important;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;  
+            font-size: 1.1em;
+        }
+
+        .recommendation-list li {
+            margin-bottom: 12px !important;
+            padding: 12px 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            border-right: 4px solid #6366f1;
+            line-height: 1.6;
+        }
+
+        .recommendation-list li strong {
+            color: #4f46e5;
+        }
+
+        /* تصميم شرح الاتجاه الزمني */
+        .trend-analysis-container {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        .trend-analysis {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .trend-analysis:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .trend-icon {
+            font-size: 2.5em;
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+        }
+
+        .trend-content {
+            flex: 1;
+        }
+
+        .trend-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 0 0 8px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .trend-description {
+            font-size: 1.1em;
+            color: #475569;
+            margin: 0;
+            line-height: 1.6;
+            text-align: justify;
+        }
+
+        /* تصميم خطة المتابعة الذكية */
+        .timeline-actions-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .timeline-actions-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            line-height: 1.5;
+            color: #374151;
+        }
+
+        .timeline-actions-list li:last-child {
+            border-bottom: none;
+        }
+
+        .no-followup {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border-radius: 12px;
+            border: 2px solid #10b981;
+            margin: 20px 0;
+        }
+
+        .plan-summary {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 12px;
+            border: 2px solid #64748b;
+        }
+
+        .plan-summary h4 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-label {
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .stat-value.trend-improving {
+            color: #059669;
+        }
+
+        .stat-value.trend-declining {
+            color: #dc2626;
+        }
+
+        .stat-value.trend-stable {
+            color: #d97706;
+        }
+
+        /* تصميم الرسم البياني العام الشامل */
+        .overall-charts-section {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 15px;
+            border: 3px solid #fbbf24;
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.2);
+        }
+
+        .overall-charts-section h3 {
+            color: #f59e0b;
+            font-size: 1.6em;
+            margin-bottom: 25px;
+            text-align: center;
+            border-bottom: 3px solid #fbbf24;
+            padding-bottom: 15px;
+        }
+
+        .charts-grid-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .charts-grid-overview .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e5e7eb;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .charts-grid-overview .chart-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .charts-grid-overview .chart-container h4 {
+            color: #374151;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 12px;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid-overview {
+                grid-template-columns: 1fr;
+            }
+            
+            .charts-grid-overview .chart-container {
+                padding: 20px;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header">
+            <div class="company-name">HSA GROUP</div>
+            <div class="report-title">تقرير نظام إدارة النظافة</div>
+            <div class="report-period">الفترة: ٢٠‏/٧‏/٢٠٢٥ - ٥‏/٨‏/٢٠٢٥</div>
+        </div>
+        
+        <div class="report-meta">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">تاريخ التوليد</div>
+                    <div class="meta-value">٥ أغسطس ٢٠٢٥</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">إجمالي التقييمات</div>
+                    <div class="meta-value">27</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">عدد المواقع</div>
+                    <div class="meta-value">10</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">عدد المستخدمين</div>
+                    <div class="meta-value">4</div>
+                </div>
+            </div>
+        </div>
+        
+        
+    <div class="analysis-section">
+      <h2 class="analysis-title">📊 تحليل النتائج والتوصيات</h2>
+      
+      <!-- الرسم البياني العام الشامل -->
+      <div class="overall-charts-section">
+        <h3>📈 الرسم البياني العام لجميع المواقع</h3>
+        
+        <div class="charts-grid-overview">
+          <div class="chart-container">
+            <h4>أداء المواقع - المقارنة العامة</h4>
+            <canvas id="overallLocationsChart" width="584" height="365" style="display: block; box-sizing: border-box; height: 292px; width: 467px;"></canvas>
+          </div>
+          
+          
+          <div class="chart-container">
+            <h4>الاتجاه الزمني العام للأداء</h4>
+            <canvas id="overallTimelineChart" width="584" height="365" style="display: block; box-sizing: border-box; height: 292px; width: 467px;"></canvas>
+          <div class="trend-analysis-container">
+            <div class="trend-analysis">
+              <div class="trend-icon" style="color: #10b981">
+                📈
+              </div>
+              <div class="trend-content">
+                <h4 class="trend-title" style="color: #10b981">
+                  تحسن ملحوظ
+                </h4>
+                <p class="trend-description">
+                  الأداء يتحسن بوتيرة إيجابية بزيادة 29.0 نقطة (1035.7%)
+                </p>
+              </div>
+            </div>
+          </div></div>
+          
+        </div>
+        
+        <script>
+          // رسم بياني شامل لجميع المواقع
+          const overallLocationsCtx = document.getElementById('overallLocationsChart').getContext('2d');
+          new Chart(overallLocationsCtx, {
+            type: 'bar',
+            data: {
+              labels: ["مبنى الإدارة ١","مبنى الإدارة ٢","دورات المياه","سكن B","سكن C","المخزن","العيادة","الصالة الرئيسية","المطبخ","منطقة الطعام"],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [24.2,33.4,2.8,3.4,3.1,3.5,3.7,3.1,4,3.8],
+                backgroundColor: function(context) {
+                  const value = parseFloat(context.parsed.y);
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز - أخضر
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد - أصفر
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول - برتقالي
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف - أحمر
+                },
+                borderColor: function(context) {
+                  const value = parseFloat(context.parsed.y);
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = parseFloat(context.parsed.y);
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          
+          // رسم بياني للاتجاه الزمني العام
+          const overallTimelineCtx = document.getElementById('overallTimelineChart').getContext('2d');
+          new Chart(overallTimelineCtx, {
+            type: 'line',
+            data: {
+              labels: ["2025-07-27","2025-07-28","2025-07-29","2025-08-04"],
+              datasets: [{
+                label: 'متوسط الأداء اليومي',
+                data: ["2.8","3.2","3.6","31.8"],
+                borderColor: '#fbbf24',
+                backgroundColor: 'rgba(251, 191, 36, 0.1)',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: function(context) {
+                  const value = parseFloat(context.parsed.y);
+                  if (value >= 3.5) return '#22c55e'; // أخضر
+                  if (value >= 2.5) return '#fbbf24'; // أصفر
+                  if (value >= 1.5) return '#f97316'; // برتقالي
+                  return '#ef4444'; // أحمر
+                },
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 6,
+                pointHoverRadius: 8
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = parseFloat(context.parsed.y);
+                      if (value >= 3.5) return 'يوم ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'يوم جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'يوم مقبول ⭐⭐';
+                      return 'يوم يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // إضافة شرح الاتجاه الزمني
+          const trendContainer = document.createElement('div');
+          trendContainer.className = 'trend-analysis-container';
+          trendContainer.innerHTML = `
+            <div class="trend-analysis">
+              <div class="trend-icon" style="color: #10b981">
+                📈
+              </div>
+              <div class="trend-content">
+                <h4 class="trend-title" style="color: #10b981">
+                  تحسن ملحوظ
+                </h4>
+                <p class="trend-description">
+                  الأداء يتحسن بوتيرة إيجابية بزيادة 29.0 نقطة (1035.7%)
+                </p>
+              </div>
+            </div>
+          `;
+          
+          const chartContainer = document.getElementById('overallTimelineChart').parentElement;
+          chartContainer.appendChild(trendContainer);
+          
+        </script>
+      </div>
+      
+      <!-- ملخص الأداء العام -->
+      <div class="performance-summary">
+        <h3>📈 ملخص الأداء العام</h3>
+        <div class="performance-metrics">
+
+          <div class="metric-card needs-improvement">
+            <div class="metric-title">متوسط التقييم العام</div>
+            <div class="metric-value">0.3/4</div>
+            <div class="metric-status">
+              🔴 يحتاج تحسين
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">إجمالي التقييمات</div>
+            <div class="metric-value">27</div>
+            <div class="metric-status">📊 البيانات</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- تحليل الأداء حسب الموقع -->
+      <div class="location-analysis">
+        <h3>🏢 تحليل الأداء حسب المواقع</h3>
+        
+        
+        <div class="performance-category excellent-locations">
+          <h4>🟢 المواقع عالية الأداء (1 موقع)</h4>
+          <ul>
+            
+              <li><strong>دورات المياه</strong> - تقييم: 3.5/4</li>
+            
+          </ul>
+          <div class="insight">💡 هذه المواقع تُدار بشكل ممتاز ويمكن اعتمادها كنموذج للمواقع الأخرى</div>
+        </div>
+        
+
+        
+
+        
+        <div class="performance-category low-locations">
+          <h4>🔴 المواقع التي تحتاج اهتماماً خاصاً (9 موقع)</h4>
+          <ul>
+            
+              <li><strong>مبنى الإدارة ١</strong> - تقييم: 0/4</li>
+            
+              <li><strong>مبنى الإدارة ٢</strong> - تقييم: 0/4</li>
+            
+              <li><strong>سكن B</strong> - تقييم: 0/4</li>
+            
+              <li><strong>سكن C</strong> - تقييم: 0/4</li>
+            
+              <li><strong>المخزن</strong> - تقييم: 0/4</li>
+            
+              <li><strong>العيادة</strong> - تقييم: 0/4</li>
+            
+              <li><strong>الصالة الرئيسية</strong> - تقييم: 0/4</li>
+            
+              <li><strong>المطبخ</strong> - تقييم: 0/4</li>
+            
+              <li><strong>منطقة الطعام</strong> - تقييم: 0/4</li>
+            
+          </ul>
+          <div class="insight">🚨 هذه المواقع تحتاج إلى خطة تحسين فورية</div>
+        </div>
+        
+      </div>
+
+      <!-- تحليل المهام الإشكالية -->
+      
+      <div class="task-analysis">
+        <h3>🛠️ المهام التي تحتاج تركيز خاص</h3>
+        <div class="problematic-tasks">
+          
+            <div class="task-issue">
+              <div class="task-name">نظافة دورات المياه</div>
+              <div class="task-stats">
+                <span>متوسط التقييم: 3.5/4</span>
+                <span>العدد الكلي: 3</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+      
+
+      <!-- التوصيات العملية الذكية -->
+      <div class="recommendations">
+        <h3>🎯 التوصيات العملية المبنية على تحليل البيانات</h3>
+        
+        <div class="recommendation-category">
+          <h4>⚡ توصيات فورية (يمكن تنفيذها خلال أسبوع)</h4>
+          <ul class="recommendation-list">
+            <li><strong>التركيز على نظافة دورات المياه:</strong> هذه المهمة تحتاج اهتماماً فورياً (متوسط التقييم: 3.5/4). يُنصح بمراجعة الإجراءات وتوفير التدريب المناسب</li><li><strong>خطة طوارئ:</strong> المواقع التالية تحتاج تدخلاً فورياً: مبنى الإدارة ١، مبنى الإدارة ٢، سكن B، سكن C، المخزن، العيادة، الصالة الرئيسية، المطبخ، منطقة الطعام</li>
+            
+          </ul>
+        </div>
+
+        <div class="recommendation-category">
+          <h4>🏗️ توصيات متوسطة المدى (شهر إلى ثلاثة أشهر)</h4>
+          <ul class="recommendation-list">
+            <li><strong>نقل الخبرات:</strong> استفادة من تجربة دورات المياه (3.5/4) لتحسين المواقع الأخرى</li><li><strong>تخصص في المباني الإدارية:</strong> جميع مواقع المباني الإدارية تحتاج برنامج تحسين متخصص (متوسط: 0.0/4)</li><li><strong>تخصص في المساكن:</strong> جميع مواقع المساكن تحتاج برنامج تحسين متخصص (متوسط: 0.0/4)</li>
+            
+            <li><strong>نظام التقييم المطور:</strong> تحسين نظام التقييم بناءً على النتائج الحالية</li>
+            <li><strong>تبادل الخبرات:</strong> تنظيم ورش عمل لتبادل أفضل الممارسات بين الفرق</li>
+          </ul>
+        </div>
+
+        <div class="recommendation-category">
+          <h4>🚀 توصيات طويلة المدى (أكثر من ثلاثة أشهر)</h4>
+          <ul class="recommendation-list">
+            <li><strong>استدامة التحسن:</strong> الأداء يتحسن بمعدل 0.8 نقطة، يُنصح بتوثيق العوامل المساهمة وتطبيقها على نطاق أوسع</li>
+            
+            <li><strong>التطوير المهني:</strong> برنامج شهادات مهنية متخصصة للعاملين</li>
+            <li><strong>الاستدامة:</strong> التحول إلى حلول صديقة للبيئة وموفرة للطاقة</li>
+            <li><strong>التوسع الذكي:</strong> تطبيق الدروس المستفادة على مواقع ومشاريع جديدة</li>
+          </ul>
+        </div>
+
+        
+        <div class="trend-analysis">
+          <h4>📈 تحليل الاتجاه الزمني</h4>
+          <div class="trend-indicator improving">
+            <span class="trend-label">الاتجاه العام: تحسن</span>
+            <span class="trend-change">مقدار التغيير: 0.8 نقطة</span>
+          </div>
+        </div>
+        
+      </div>
+
+      <!-- خطة المتابعة المقترحة الذكية -->
+      <div class="follow-up-plan">
+        <h3>📅 خطة المتابعة المخصصة بناءً على التحليل</h3>
+        
+        <div class="follow-up-timeline">
+          
+            <div class="timeline-item">
+              <div class="timeline-period">الأسبوع الأول</div>
+              <div class="timeline-action">
+                <ul class="timeline-actions-list">
+                  <li>مراجعة فورية لمعايير "نظافة دورات المياه" في جميع المواقع</li><li>تدريب مكثف للفريق على تحسين "نظافة دورات المياه"</li><li>زيارة تفقدية يومية لموقع مبنى الإدارة ١ (تقييم حالي: 0/4)</li><li>زيارة تفقدية يومية لموقع مبنى الإدارة ٢ (تقييم حالي: 0/4)</li>
+                </ul>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-period">الأسبوع الثاني</div>
+              <div class="timeline-action">
+                <ul class="timeline-actions-list">
+                  <li>تنظيم زيارة تبادل خبرات من دورات المياه إلى المواقع الأخرى</li>
+                </ul>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-period">الشهر الأول</div>
+              <div class="timeline-action">
+                <ul class="timeline-actions-list">
+                  <li>برنامج تحسين متخصص لجميع مواقع المباني الإدارية (متوسط حالي: 0.0/4)</li><li>برنامج تحسين متخصص لجميع مواقع المساكن (متوسط حالي: 0.0/4)</li><li>تطوير برنامج مكافآت للحفاظ على مستوى الأداء الجيد</li>
+                </ul>
+              </div>
+            </div>
+          
+            <div class="timeline-item">
+              <div class="timeline-period">كل ثلاثة أشهر</div>
+              <div class="timeline-action">
+                <ul class="timeline-actions-list">
+                  <li>توثيق عوامل النجاح المؤدية للتحسن بمقدار 0.8 نقطة وتطبيقها على نطاق أوسع</li><li>تطوير برنامج شهادات مهنية للفريق وتحديث أدوات العمل</li>
+                </ul>
+              </div>
+            </div>
+          
+        </div>
+
+        
+
+        <div class="plan-summary">
+          <h4>📊 ملخص الخطة المخصصة</h4>
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-label">إجمالي التقييمات المحللة:</span>
+              <span class="stat-value">27 تقييم</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">المواقع المشمولة:</span>
+              <span class="stat-value">1 موقع</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">فترة التحليل:</span>
+              <span class="stat-value">26 يوم</span>
+            </div>
+            
+            <div class="stat-item">
+              <span class="stat-label">الاتجاه العام:</span>
+              <span class="stat-value trend-improving">تحسن</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  
+        
+        <div class="report-content">
+            <h2 class="section-title">📋 تفاصيل التقييمات حسب الموقع</h2>
+            
+      <div class="location-section">
+        <h3 class="location-title">مبنى الإدارة ١ (Administration Building 1)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">4</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">3</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_1" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_1" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: مدير عام مجموعة هايل سعيد أنعم</span>
+            <span>الوقت: ٠٦:٠٦ م</span>
+            <span>التقييم العام: 87.5/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+          <div class="evaluation-notes">
+            <strong>ملاحظات التقييم:</strong>
+            <p>تقييم شامل من المدير العام للنظام</p>
+          </div>
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: صلاح الصغير</span>
+            <span>الوقت: ٠٥:٥٧ م</span>
+            <span>التقييم العام: 3/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+          <div class="evaluation-notes">
+            <strong>ملاحظات التقييم:</strong>
+            <p>اختبار بعد الإصلاح</p>
+          </div>
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٣٥ م</span>
+            <span>التقييم العام: 3/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, July 28, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٥:٤٤ م</span>
+            <span>التقييم العام: 3.2/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_1 = document.getElementById('locationPerformanceChart_location_1').getContext('2d');
+          new Chart(locationPerformanceCtx_location_1, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_1 = document.getElementById('taskPerformanceChart_location_1').getContext('2d');
+          new Chart(taskPerformanceCtx_location_1, {
+            type: 'bar',
+            data: {
+              labels: ["مبنى الإدارة ١"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">مبنى الإدارة ٢ (Administration Building 2)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">3</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">2</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_2" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_2" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: عبده سعيد</span>
+            <span>الوقت: ٠٦:٠٦ م</span>
+            <span>التقييم العام: 93.5/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+          <div class="evaluation-notes">
+            <strong>ملاحظات التقييم:</strong>
+            <p>تقييم شامل من مدير الشركة</p>
+          </div>
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٥٠ م</span>
+            <span>التقييم العام: 3.8/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٣٦ م</span>
+            <span>التقييم العام: 3/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_2 = document.getElementById('locationPerformanceChart_location_2').getContext('2d');
+          new Chart(locationPerformanceCtx_location_2, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_2 = document.getElementById('taskPerformanceChart_location_2').getContext('2d');
+          new Chart(taskPerformanceCtx_location_2, {
+            type: 'bar',
+            data: {
+              labels: ["مبنى الإدارة ٢"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">دورات المياه (Restrooms)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">5</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">3.5/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">2</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_9" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_9" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: عبده سعيد</span>
+            <span>الوقت: ١٠:٤٢ م</span>
+            <span>التقييم العام: 3/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+            <div class="task-item completed">
+              <div class="task-category">نظافة دورات المياه</div>
+              <div class="task-name">تقرير التفتيش والمتابعة الدورية لدورات المياه</div>
+              <div class="task-status">
+                <span class="status">مكتمل</span>
+                <span class="rating">جيد</span>
+              </div>
+            </div>
+          
+        </div>
+        
+        
+          <div class="evaluation-notes">
+            <strong>ملاحظات التقييم:</strong>
+            <p>ok</p>
+          </div>
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: عبده سعيد</span>
+            <span>الوقت: ١٠:٤١ م</span>
+            <span>التقييم العام: غير مقيم</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+            <div class="task-item incomplete">
+              <div class="task-category">نظافة دورات المياه</div>
+              <div class="task-name">تقرير التفتيش والمتابعة الدورية لدورات المياه</div>
+              <div class="task-status">
+                <span class="status">غير مكتمل</span>
+                <span class="rating">غير مقيم</span>
+              </div>
+            </div>
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Monday, August 4, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: عبده سعيد</span>
+            <span>الوقت: ١٠:٤٠ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+            <div class="task-item completed">
+              <div class="task-category">نظافة دورات المياه</div>
+              <div class="task-name">تقرير التفتيش والمتابعة الدورية لدورات المياه</div>
+              <div class="task-status">
+                <span class="status">مكتمل</span>
+                <span class="rating">ممتاز</span>
+              </div>
+            </div>
+          
+        </div>
+        
+        
+          <div class="evaluation-notes">
+            <strong>ملاحظات التقييم:</strong>
+            <p>ok</p>
+          </div>
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٣ م</span>
+            <span>التقييم العام: 3.9/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Sunday, July 27, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٥:٥٧ م</span>
+            <span>التقييم العام: 2.9/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_9 = document.getElementById('locationPerformanceChart_location_9').getContext('2d');
+          new Chart(locationPerformanceCtx_location_9, {
+            type: 'bar',
+            data: {
+              labels: ["تقرير التفتيش والمتابعة الدورية لدورات المياه"],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [3.5],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_9 = document.getElementById('taskPerformanceChart_location_9').getContext('2d');
+          new Chart(taskPerformanceCtx_location_9, {
+            type: 'bar',
+            data: {
+              labels: ["دورات المياه"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [3.5],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">سكن B (Residence B)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">1</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_4" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_4" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٨ م</span>
+            <span>التقييم العام: 3.4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_4 = document.getElementById('locationPerformanceChart_location_4').getContext('2d');
+          new Chart(locationPerformanceCtx_location_4, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_4 = document.getElementById('taskPerformanceChart_location_4').getContext('2d');
+          new Chart(taskPerformanceCtx_location_4, {
+            type: 'bar',
+            data: {
+              labels: ["سكن B"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">سكن C (Residence C)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">2</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_5" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_5" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٧ م</span>
+            <span>التقييم العام: 3.1/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٧ م</span>
+            <span>التقييم العام: 3.1/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_5 = document.getElementById('locationPerformanceChart_location_5').getContext('2d');
+          new Chart(locationPerformanceCtx_location_5, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_5 = document.getElementById('taskPerformanceChart_location_5').getContext('2d');
+          new Chart(taskPerformanceCtx_location_5, {
+            type: 'bar',
+            data: {
+              labels: ["سكن C"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">المخزن (Storage)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">2</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_11" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_11" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٦ م</span>
+            <span>التقييم العام: 3.5/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٦ م</span>
+            <span>التقييم العام: 3.5/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_11 = document.getElementById('locationPerformanceChart_location_11').getContext('2d');
+          new Chart(locationPerformanceCtx_location_11, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_11 = document.getElementById('taskPerformanceChart_location_11').getContext('2d');
+          new Chart(taskPerformanceCtx_location_11, {
+            type: 'bar',
+            data: {
+              labels: ["المخزن"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">العيادة (Medical Clinic)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">2</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_6" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_6" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٥ م</span>
+            <span>التقييم العام: 3.5/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٢:٥٢ م</span>
+            <span>التقييم العام: 3.9/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_6 = document.getElementById('locationPerformanceChart_location_6').getContext('2d');
+          new Chart(locationPerformanceCtx_location_6, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_6 = document.getElementById('taskPerformanceChart_location_6').getContext('2d');
+          new Chart(taskPerformanceCtx_location_6, {
+            type: 'bar',
+            data: {
+              labels: ["العيادة"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">الصالة الرئيسية (Main Hall)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">1</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_7" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_7" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٥ م</span>
+            <span>التقييم العام: 3.1/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_7 = document.getElementById('locationPerformanceChart_location_7').getContext('2d');
+          new Chart(locationPerformanceCtx_location_7, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_7 = document.getElementById('taskPerformanceChart_location_7').getContext('2d');
+          new Chart(taskPerformanceCtx_location_7, {
+            type: 'bar',
+            data: {
+              labels: ["الصالة الرئيسية"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">المطبخ (Kitchen)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">2</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">1</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_8" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_8" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٤ م</span>
+            <span>التقييم العام: 3.9/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٢:٥١ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_8 = document.getElementById('locationPerformanceChart_location_8').getContext('2d');
+          new Chart(locationPerformanceCtx_location_8, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_8 = document.getElementById('taskPerformanceChart_location_8').getContext('2d');
+          new Chart(taskPerformanceCtx_location_8, {
+            type: 'bar',
+            data: {
+              labels: ["المطبخ"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+      <div class="location-section">
+        <h3 class="location-title">منطقة الطعام (Dining Area)</h3>
+        <div class="location-summary">
+          <div class="summary-item">
+            <span class="label">إجمالي التقييمات:</span>
+            <span class="value">5</span>
+          </div>
+
+          <div class="summary-item">
+            <span class="label">التقييم العام:</span>
+            <span class="value">0/4</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">عدد المقيمين:</span>
+            <span class="value">2</span>
+          </div>
+        </div>
+        
+        <!-- الرسوم البيانية للموقع والمستخدم -->
+        <div class="charts-section">
+          <h4 class="charts-title">📊 تحليل الأداء حسب الموقع والمستخدم</h4>
+          <div class="charts-grid">
+            <div class="chart-container">
+              <h5>🏢 أداء الموقع - متوسط التقييمات</h5>
+              <canvas id="locationPerformanceChart_location_10" width="610" height="375" style="display: block; box-sizing: border-box; height: 300px; width: 488px;"></canvas>
+            </div>
+            <div class="chart-container">
+              <h5>📊 متوسط تقييم الموقع اجمالي</h5>
+              <canvas id="taskPerformanceChart_location_10" width="400" height="300"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٤ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٤ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٩:٤٤ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Tuesday, July 29, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: احمد عارف</span>
+            <span>الوقت: ٠٢:٥١ م</span>
+            <span>التقييم العام: 4/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+      <div class="daily-report">
+        <div class="daily-header">
+          <h4>Sunday, July 27, 2025</h4>
+          <div class="daily-meta">
+            <span>المقيم: عبده سعيد</span>
+            <span>الوقت: ٠٦:١٣ م</span>
+            <span>التقييم العام: 2.8/4</span>
+          </div>
+        </div>
+        
+        <div class="tasks-grid">
+          
+        </div>
+        
+        
+      </div>
+    
+        
+        <script>
+          // رسم بياني لأداء الموقع - المهام والتقييمات
+          const locationPerformanceCtx_location_10 = document.getElementById('locationPerformanceChart_location_10').getContext('2d');
+          new Chart(locationPerformanceCtx_location_10, {
+            type: 'bar',
+            data: {
+              labels: [],
+              datasets: [{
+                label: 'متوسط التقييم',
+                data: [],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // ضعيف
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgb(34, 197, 94)';
+                  if (value >= 2.5) return 'rgb(251, 191, 36)';
+                  if (value >= 1.5) return 'rgb(249, 115, 22)';
+                  return 'rgb(239, 68, 68)';
+                },
+                borderWidth: 2,
+                borderRadius: 8,
+                borderSkipped: false
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return 'أداء ممتاز ⭐⭐⭐⭐';
+                      if (value >= 2.5) return 'أداء جيد ⭐⭐⭐';
+                      if (value >= 1.5) return 'أداء مقبول ⭐⭐';
+                      return 'يحتاج تحسين ⭐';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 1,
+                    callback: function(value) {
+                      const labels = ['', 'ضعيف', 'مقبول', 'جيد', 'ممتاز'];
+                      return labels[value] || value;
+                    }
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: { size: 10 }
+                  }
+                }
+              }
+            }
+          });
+          
+          // رسم بياني عمودي لمتوسط تقييم الموقع الإجمالي (عمود واحد)
+          const taskPerformanceCtx_location_10 = document.getElementById('taskPerformanceChart_location_10').getContext('2d');
+          new Chart(taskPerformanceCtx_location_10, {
+            type: 'bar',
+            data: {
+              labels: ["منطقة الطعام"],
+              datasets: [{
+                label: 'متوسط التقييم الإجمالي',
+                data: [0],
+                backgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.8)'; // أخضر ممتاز
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.8)'; // أصفر جيد
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.8)'; // برتقالي مقبول
+                  return 'rgba(239, 68, 68, 0.8)'; // أحمر يحتاج تحسين
+                },
+                borderColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return '#16a34a';
+                  if (value >= 2.5) return '#f59e0b';
+                  if (value >= 1.5) return '#ea580c';
+                  return '#dc2626';
+                },
+                borderWidth: 2,
+                borderRadius: 6,
+                borderSkipped: false,
+                hoverBackgroundColor: function(context) {
+                  const value = context.parsed.y;
+                  if (value >= 3.5) return 'rgba(34, 197, 94, 0.9)';
+                  if (value >= 2.5) return 'rgba(251, 191, 36, 0.9)';
+                  if (value >= 1.5) return 'rgba(249, 115, 22, 0.9)';
+                  return 'rgba(239, 68, 68, 0.9)';
+                }
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: false
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  titleColor: '#fff',
+                  bodyColor: '#fff',
+                  borderColor: '#fbbf24',
+                  borderWidth: 2,
+                  callbacks: {
+                    title: function(context) {
+                      return 'المهمة: ' + context[0].label;
+                    },
+                    label: function(context) {
+                      const value = context.parsed.y;
+                      let performance = '';
+                      if (value >= 3.5) performance = 'ممتاز ⭐⭐⭐⭐';
+                      else if (value >= 2.5) performance = 'جيد ⭐⭐⭐';
+                      else if (value >= 1.5) performance = 'مقبول ⭐⭐';
+                      else if (value > 0) performance = 'يحتاج تحسين ⭐';
+                      else performance = 'لا توجد تقييمات';
+                      
+                      return 'متوسط التقييم: ' + value.toFixed(1) + '/4 - ' + performance;
+                    },
+                    afterLabel: function(context) {
+                      const value = context.parsed.y;
+                      if (value >= 3.5) return '🟢 أداء ممتاز';
+                      else if (value >= 2.5) return '🟡 أداء جيد';
+                      else if (value >= 1.5) return '🟠 أداء مقبول';
+                      else if (value > 0) return '🔴 يحتاج تحسين';
+                      else return '⚪ لا توجد بيانات';
+                    }
+                  }
+                }
+              },
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  max: 4,
+                  ticks: {
+                    stepSize: 0.5,
+                    callback: function(value) {
+                      const labels = {
+                        0: '0',
+                        1: '1 - ضعيف',
+                        2: '2 - مقبول', 
+                        3: '3 - جيد',
+                        4: '4 - ممتاز'
+                      };
+                      return labels[value] || value;
+                    },
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 10
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                    drawBorder: false
+                  }
+                },
+                x: {
+                  ticks: {
+                    maxRotation: 45,
+                    font: {
+                      family: 'Segoe UI, IBM Plex Sans Arabic, Arial',
+                      size: 9,
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    display: false
+                  }
+                }
+              },
+              animation: {
+                duration: 1500,
+                easing: 'easeInOutQuart'
+              },
+              interaction: {
+                intersect: false,
+                mode: 'index'
+              }
+            }
+          });
+        </script>
+      </div>
+    
+        </div>
+        
+        <div class="report-footer">
+            تم إنشاء هذا التقرير بواسطة نظام إدارة النظافة - HSA GROUP
+            <br>
+            ٥ أغسطس ٢٠٢٥ في الساعة ١١:٤٥:٤٠ ص
+        </div>
+    </div>
+
+
+  </body></html>

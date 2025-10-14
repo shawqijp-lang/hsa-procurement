@@ -1,0 +1,53 @@
+{
+  "edge": {
+    "app": {
+      "name": "HSA EVALUATE",
+      "description": "نظام تقييم بيئة العمل المتطور",
+      "version": "6.25.0",
+      "capabilities": [
+        "native-file-system",
+        "native-clipboard",
+        "push-notifications",
+        "background-sync",
+        "storage-quota",
+        "payment-request"
+      ],
+      "integration": {
+        "windows": {
+          "jumplist": true,
+          "taskbar": true,
+          "startMenu": true,
+          "systemTray": false,
+          "notifications": true,
+          "fileAssociations": [".hsa", ".hsaeval"]
+        },
+        "features": {
+          "windowControls": true,
+          "tabbed": false,
+          "resizable": true,
+          "minimizable": true,
+          "maximizable": true,
+          "closeable": true
+        }
+      },
+      "window": {
+        "minWidth": 360,
+        "minHeight": 600,
+        "defaultWidth": 1200,
+        "defaultHeight": 800,
+        "titleBarStyle": "default",
+        "frame": true,
+        "transparent": false
+      },
+      "security": {
+        "contentSecurityPolicy": "upgrade-insecure-requests",
+        "httpsOnly": true,
+        "permissions": [
+          "notifications",
+          "persistent-storage",
+          "background-sync"
+        ]
+      }
+    }
+  }
+}

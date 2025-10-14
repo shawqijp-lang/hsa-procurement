@@ -1,0 +1,1 @@
+window.resetIndexedDB = async () => { const { resetIndexedDB } = await import("/src/utils/dbReset.ts"); const { localDatabase } = await import("/src/lib/advancedLocalDatabase.ts"); await resetIndexedDB(); await localDatabase.initialize(); console.log("✅ تم إعادة تعيين قاعدة البيانات"); window.location.reload(); };

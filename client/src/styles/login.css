@@ -1,0 +1,859 @@
+/* ===== شاشة تسجيل الدخول - نمط HSA Group محسّن للهواتف ===== */
+
+/* ===== متغيرات الألوان والأحجام ===== */
+:root {
+  /* الألوان الأساسية - تصميم أبيض مع أصفر وأسود */
+  --hsa-white: #FFFFFF;
+  --hsa-white-soft: #FEFEFE;
+  --hsa-yellow: #FFC107;
+  --hsa-yellow-dark: #FF8F00;
+  --hsa-black: #000000;
+  --hsa-gray-900: #F8F9FA;
+  --hsa-gray-800: #E9ECEF;
+  --hsa-gray-700: #DEE2E6;
+  --hsa-gray-600: #6C757D;
+  --hsa-gray-300: #495057;
+  --hsa-gray-400: #6C757D;
+  
+  /* أحجام العناصر - محسّنة للهواتف */
+  --company-button-size: 48px;
+  --logo-size-mobile: 44px;
+  --logo-size-desktop: 56px;
+  --input-height-mobile: 52px;
+  --button-height-mobile: 56px;
+  --card-padding-mobile: 20px;
+  --card-padding-desktop: 32px;
+  
+  /* الانتقالات */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.25s ease-out;
+  --transition-slow: 0.4s ease-out;
+  
+  /* الظلال */
+  --shadow-mobile: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --shadow-button: 0 8px 25px rgba(253, 224, 71, 0.3);
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.2);
+  
+  /* التباعد */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* ===== الخلفية الأساسية محسّنة للهواتف ===== */
+.login-container {
+  background: linear-gradient(135deg, var(--hsa-white) 0%, var(--hsa-gray-900) 50%, var(--hsa-white-soft) 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height للهواتف الحديثة */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== الخلفية الهندسية محسّنة للهواتف ===== */
+.geometric-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+.geometric-patterns {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.03; /* أقل تشويشاً على الهواتف */
+}
+
+.pattern-square {
+  position: absolute;
+  border: 1px solid var(--hsa-yellow);
+  transform: rotate(45deg);
+  animation: float 6s ease-in-out infinite;
+}
+
+.pattern-square:nth-child(1) {
+  top: 10%;
+  left: 15%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+}
+
+.pattern-square:nth-child(2) {
+  top: 20%;
+  right: 10%;
+  width: 40px;
+  height: 40px;
+  transform: rotate(12deg);
+  animation-delay: 1s;
+}
+
+.pattern-square:nth-child(3) {
+  bottom: 20%;
+  left: 10%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 2s;
+}
+
+.pattern-square:nth-child(4) {
+  bottom: 15%;
+  right: 20%;
+  width: 50px;
+  height: 50px;
+  transform: rotate(-12deg);
+  animation-delay: 3s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(45deg); }
+  50% { transform: translateY(-10px) rotate(45deg); }
+}
+
+/* ===== التأثيرات الضوئية محسّنة ===== */
+.glow-effect-1 {
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, var(--hsa-yellow), transparent 70%);
+  border-radius: 50%;
+  opacity: 0.08;
+  filter: blur(40px);
+}
+
+.glow-effect-2 {
+  position: absolute;
+  bottom: 30%;
+  right: -10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--hsa-yellow-dark), transparent 70%);
+  border-radius: 50%;
+  opacity: 0.08;
+  filter: blur(35px);
+}
+
+/* ===== زر الشركات محسّن للهواتف ===== */
+.draggable-company-button {
+  position: fixed;
+  z-index: 50;
+  cursor: grab;
+  user-select: none;
+  transition: var(--transition-normal);
+  touch-action: none; /* منع التمرير أثناء السحب */
+}
+
+.draggable-company-button.dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.company-button {
+  width: var(--company-button-size);
+  height: var(--company-button-size);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 193, 7, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2), 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.company-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 143, 0, 0.1));
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.company-button:hover::before,
+.company-button:active::before {
+  opacity: 1;
+}
+
+.company-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(255, 193, 7, 0.3), 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.company-button:active {
+  transform: scale(0.98);
+}
+
+.company-button.dragging {
+  transform: scale(1.1);
+  box-shadow: 0 20px 40px rgba(255, 193, 7, 0.4), 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== مؤشر السحب ===== */
+.drag-indicator {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+
+.drag-dot {
+  width: 4px;
+  height: 4px;
+  background: rgba(253, 224, 71, 0.5);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.drag-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.drag-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ===== قائمة الشركات المنسدلة ===== */
+.company-dropdown {
+  position: absolute;
+  width: 256px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(255, 193, 7, 0.15), 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.company-dropdown.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.company-dropdown.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+}
+
+.company-dropdown-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--hsa-black);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.company-option {
+  width: 100%;
+  padding: 12px;
+  text-align: right;
+  border-radius: 12px;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--hsa-black);
+}
+
+.company-option:hover {
+  background: rgba(255, 193, 7, 0.1);
+  color: var(--hsa-yellow-dark);
+}
+
+.company-option.selected {
+  background: rgba(255, 193, 7, 0.15);
+  border: 2px solid rgba(255, 193, 7, 0.4);
+  color: var(--hsa-yellow-dark);
+  font-weight: 600;
+}
+
+.company-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--hsa-gray-600);
+}
+
+.company-indicator.selected {
+  background: var(--hsa-yellow);
+}
+
+/* ===== رأس الصفحة محسّن للهواتف ===== */
+.login-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  position: relative;
+  z-index: 2;
+}
+
+/* شعار HSA مع العنوان في تخطيط مدمج */
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.logo-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.hsa-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-size-mobile);
+  height: var(--logo-size-mobile);
+  flex-shrink: 0;
+}
+
+.hsa-logo-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--hsa-yellow), var(--hsa-yellow-dark));
+  border-radius: 10px;
+  box-shadow: var(--shadow-mobile);
+}
+
+.hsa-logo-frame {
+  position: absolute;
+  inset: 2px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hsa-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* العنوان والنصوص */
+.title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: right;
+}
+
+.system-title {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  font-size: 14px;
+  color: var(--hsa-black);
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  text-shadow: 0 1px 3px rgba(255, 193, 7, 0.3);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+.title-divider {
+  height: 2px;
+  width: 40px;
+  background: linear-gradient(90deg, var(--hsa-yellow), var(--hsa-yellow-dark));
+  margin: 2px 0 4px 0;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(253, 224, 71, 0.3);
+  align-self: flex-start;
+}
+
+.company-subtitle {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  color: var(--hsa-gray-600);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* شارة الأمان مبسطة */
+.security-badge {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.security-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(253, 224, 71, 0.2);
+  border-radius: 16px;
+  box-shadow: var(--shadow-mobile);
+}
+
+.security-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--hsa-yellow);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.security-text {
+  color: var(--hsa-yellow);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* ===== بطاقة تسجيل الدخول محسّنة للهواتف ===== */
+.login-main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: var(--space-md);
+  position: relative;
+  z-index: 2;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  box-shadow: 0 10px 40px rgba(255, 193, 7, 0.15), 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.login-card-header {
+  text-align: center;
+  padding: var(--space-xl) var(--card-padding-mobile) var(--space-lg);
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.08), rgba(255, 143, 0, 0.05));
+  border-bottom: 1px solid rgba(255, 193, 7, 0.2);
+  position: relative;
+}
+
+.login-card-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--hsa-yellow), var(--hsa-yellow-dark));
+  border-radius: 0 0 10px 10px;
+}
+
+.login-card-title {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  font-size: 20px;
+  color: var(--hsa-black);
+  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(255, 193, 7, 0.3);
+  letter-spacing: 0.01em;
+}
+
+.login-card-subtitle {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  color: var(--hsa-gray-600);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.login-card-content {
+  padding: var(--card-padding-mobile);
+}
+
+/* ===== حقول الإدخال محسّنة للهواتف ===== */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-label {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--hsa-black);
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.01em;
+}
+
+.input-icon {
+  width: 28px;
+  height: 28px;
+  background: rgba(253, 224, 71, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(253, 224, 71, 0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-icon svg {
+  width: 14px;
+  height: 14px;
+  color: var(--hsa-yellow);
+}
+
+.login-input {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  width: 100%;
+  height: var(--input-height-mobile);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  color: var(--hsa-black);
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 var(--space-md);
+  transition: all var(--transition-fast);
+  position: relative;
+  outline: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: 0.01em;
+}
+
+.login-input::placeholder {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  color: var(--hsa-gray-600);
+  font-weight: 400;
+}
+
+.login-input:focus {
+  border-color: var(--hsa-yellow);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2), 0 4px 15px rgba(255, 193, 7, 0.15);
+  transform: translateY(-1px);
+}
+
+.login-input:active {
+  transform: translateY(0);
+}
+
+/* تحسين تجربة الكتابة على iOS */
+.login-input:focus {
+  font-size: 16px; /* منع التكبير التلقائي في Safari */
+}
+
+/* ===== رسائل النجاح والخطأ محسّنة ===== */
+.message-container {
+  margin-bottom: var(--space-lg);
+  animation: slideIn 0.3s ease-out;
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(16, 185, 129, 0.3);
+  border-radius: 12px;
+  gap: var(--space-sm);
+  color: var(--hsa-black);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  gap: var(--space-sm);
+  color: var(--hsa-black);
+}
+
+.selected-company-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(255, 193, 7, 0.08);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 193, 7, 0.3);
+  border-radius: 12px;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  color: var(--hsa-black);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== زر تسجيل الدخول محسّن للهواتف ===== */
+.login-button {
+  font-family: 'Noto Sans Arabic', 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+  width: 100%;
+  height: var(--button-height-mobile);
+  background: linear-gradient(135deg, var(--hsa-yellow), var(--hsa-yellow-dark));
+  color: var(--hsa-white);
+  font-weight: 700;
+  font-size: 17px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4), 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal);
+  border: 2px solid var(--hsa-yellow-dark);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  letter-spacing: 0.02em;
+}
+
+.login-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.login-button:hover:not(:disabled)::before,
+.login-button:focus:not(:disabled)::before {
+  opacity: 1;
+}
+
+.login-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 193, 7, 0.5), 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.login-button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  background: linear-gradient(135deg, var(--hsa-gray-700), var(--hsa-gray-800));
+  color: var(--hsa-gray-600);
+}
+
+.login-button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== شارة الأمان السفلية ===== */
+.bottom-security {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.security-badge-bottom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(17, 24, 39, 0.6);
+  border: 1px solid var(--hsa-gray-700);
+  border-radius: 20px;
+}
+
+.security-pulse {
+  width: 12px;
+  height: 12px;
+  background: #10B981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.security-badge-text {
+  color: var(--hsa-gray-300);
+  font-size: 14px;
+}
+
+/* ===== شارة الأمان السفلية ===== */
+.bottom-security {
+  padding: var(--space-md);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.security-badge-bottom {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 193, 7, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.security-pulse {
+  width: 8px;
+  height: 8px;
+  background: #10B981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.security-badge-text {
+  color: var(--hsa-gray-600);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ===== الاستجابة للشاشات الكبيرة ===== */
+@media (min-width: 640px) {
+  :root {
+    --card-padding-mobile: var(--card-padding-desktop);
+    --input-height-mobile: 60px;
+    --button-height-mobile: 64px;
+  }
+  
+  .hsa-logo-container {
+    width: var(--logo-size-desktop);
+    height: var(--logo-size-desktop);
+  }
+  
+  .hsa-logo-bg {
+    border-radius: 14px;
+  }
+  
+  .hsa-logo-frame {
+    border-radius: 10px;
+  }
+  
+  .system-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .title-divider {
+    width: 60px;
+    height: 3px;
+  }
+  
+  .company-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .security-text {
+    font-size: 10px;
+  }
+  
+  .login-card {
+    border-radius: 24px;
+    max-width: 450px;
+  }
+  
+  .login-card-title {
+    font-size: 24px;
+  }
+  
+  .login-card-subtitle {
+    font-size: 16px;
+  }
+  
+  .login-input {
+    font-size: 17px;
+  }
+  
+  .login-button {
+    font-size: 18px;
+  }
+}
+
+/* ===== تحسينات إضافية للأجهزة اللمسية ===== */
+@media (hover: none) and (pointer: coarse) {
+  .company-button:hover {
+    transform: none;
+  }
+  
+  .login-button:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .login-input:focus {
+    transform: none;
+  }
+}
+
+/* ===== إخفاء شريط التمرير في WebKit ===== */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

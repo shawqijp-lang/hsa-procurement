@@ -1,0 +1,50 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+🔌 Initializing database connection...
+1:16:43 PM [express] 🚀 Starting server initialization...
+1:16:43 PM [express] 🔑 OPENAI_API_KEY: Set
+1:16:43 PM [express] 🔑 JWT_SECRET: Set
+1:16:43 PM [express] ✅ Environment variables validated
+1:16:43 PM [express] 🔍 Testing database connection...
+✅ Database connection established
+1:16:43 PM [express] ✅ Database connection verified
+1:16:43 PM [express] 🔧 Initializing default data...
+1:16:43 PM [express] 🔧 Unified environment - full functionality enabled
+1:16:43 PM [express] ℹ️ Default location initialization disabled
+ℹ️ Default location initialization disabled
+📋 Templates already exist (104 templates). Skipping initialization.
+🔧 Registering advanced monitoring routes...
+🔧 Registering enhanced analytics routes...
+🔧 Registering advanced analytics routes...
+🔧 Registering company backup routes...
+✅ تم تسجيل مسارات النسخ الاحتياطي للشركات
+🔧 Registering Interactive KPI routes...
+✅ Interactive KPI routes registered
+🔧 Registering unified storage system routes...
+🔧 Registering enhanced system features...
+✅ All advanced routes and features registered successfully
+🔧 Registering professional Excel export route...
+1:16:44 PM [express] ✅ Routes registered successfully
+1:16:44 PM [express] 🔧 Setting up Vite development server...
+1:16:44 PM [express] ✅ Development Vite server ready
+1:16:44 PM [express] 🌐 Starting server on 0.0.0.0:5000...
+1:16:44 PM [express] ✅ Server running successfully on 0.0.0.0:5000
+1:16:44 PM [express] 🔗 Environment: development
+1:16:44 PM [express] 📊 Database: Connected
+✅ CORS allowed origin: https://1acee193-55c8-415e-b444-47becacb2158-00-xt1lr9594cfu.spock.replit.dev
+⚠️ Slow request: GET /@vite/client took 1269ms
+✅ CORS allowed origin: https://1acee193-55c8-415e-b444-47becacb2158-00-xt1lr9594cfu.spock.replit.dev
+✅ CORS allowed origin: https://1acee193-55c8-415e-b444-47becacb2158-00-xt1lr9594cfu.spock.replit.dev
+✅ CORS allowed origin: https://1acee193-55c8-415e-b444-47becacb2158-00-xt1lr9594cfu.spock.replit.dev
+✅ CORS allowed origin: https://1acee193-55c8-415e-b444-47becacb2158-00-xt1lr9594cfu.spock.replit.dev
+1:16:52 PM [vite] Pre-transform error: /home/runner/workspace/client/src/components/enhanced-general-manager/AnalyticsUsersManagement.tsx: Unexpected token (55:8)
+
+  53 |           'Content-Type': 'application/json',
+  54 |           'Authorization': `Bearer ${// localStorage removed
+> 55 |         },
+     |         ^
+  56 |         body: JSON.stringify(userData),
+  57 |       });
+  58 | 

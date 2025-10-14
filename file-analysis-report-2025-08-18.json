@@ -1,0 +1,699 @@
+{
+  "timestamp": "2025-08-18T22:00:25.089Z",
+  "summary": {
+    "totalFilesAnalyzed": 124,
+    "filesToKeep": 33,
+    "filesToRemove": 121,
+    "spaceToBeSaved": "1.11 MB",
+    "cleanupRecommendation": "يمكن إجراء تنظيف خفيف"
+  },
+  "categories": {
+    "documentationFiles": {
+      "count": 51,
+      "files": [
+        {
+          "name": "ADVANCED_SYSTEM_ENHANCEMENTS_COMPLETED.md",
+          "size": 7871,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "ALTERNATIVE_COPYING_METHODS.md",
+          "size": 5590,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "CHECKPOINT_DATA_SOLUTION.md",
+          "size": 2666,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "CLEANUP_SYSTEM_ANALYSIS.md",
+          "size": 6722,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "COMPANY_CUSTOMIZATION_TEMPLATES.md",
+          "size": 11311,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "COMPREHENSIVE_OFFLINE_SYSTEMS_ANALYSIS.md",
+          "size": 9771,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "COMPREHENSIVE_SECURITY_AUDIT_REPORT.md",
+          "size": 8704,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "COMPREHENSIVE_SYSTEM_AUDIT_REPORT.md",
+          "size": 6060,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "CONFLICT_CHECK_FINAL_REPORT.md",
+          "size": 7527,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "CUSTOMIZATION_GUIDE.md",
+          "size": 6450,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "CYBERSECURITY_AUDIT_REPORT.md",
+          "size": 5529,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "DATA_PERSISTENCE_SOLUTION.md",
+          "size": 10480,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "DEPLOYMENT_SECURITY_REPORT.md",
+          "size": 2074,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "ENHANCED_GENERAL_MANAGER_SPECIFICATIONS.md",
+          "size": 11652,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "EXCEL_IMPORT_ANALYSIS_REPORT.md",
+          "size": 4276,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "EXPERT_SYSTEM_ANALYSIS_REPORT.md",
+          "size": 9576,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "FINAL_STORAGE_EXPERT_VERIFICATION_REPORT.md",
+          "size": 2991,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "HODEIDAH_COMPANY_BACKUP_GUIDE.md",
+          "size": 4213,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "HSA_DAIRY_TAIZ_SETUP.md",
+          "size": 8380,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "HSA_GROUP_MULTI_COMPANY_PROPOSAL.md",
+          "size": 6839,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "HSA_GROUP_SEPARATE_INSTANCES_PLAN.md",
+          "size": 8311,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "LOCAL_STORAGE_SYSTEMS_ANALYSIS.md",
+          "size": 8805,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "MEMORY_OPTIMIZATION_GUIDE.md",
+          "size": 5437,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "OFFLINE_SYSTEMS_CONFLICTS_REPORT.md",
+          "size": 4720,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "OFFLINE_SYSTEMS_SUMMARY.md",
+          "size": 9082,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "PERFORMANCE_MONITORING_GUIDE.md",
+          "size": 6461,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "PRODUCTION_DATA_MIGRATION_GUIDE.md",
+          "size": 4085,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "PRODUCTION_DEPLOYMENT_GUIDE.md",
+          "size": 1676,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "PROJECT_CLONING_GUIDE.md",
+          "size": 5991,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "REPLICATION_PACKAGE.md",
+          "size": 3903,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "REPORT_SYSTEM_ENHANCEMENT_COMPLETED.md",
+          "size": 7918,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "ROLE_PERMISSIONS_LOCK.md",
+          "size": 3179,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SAFE_DEPLOYMENT_GUIDE.md",
+          "size": 1948,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SECURE_OFFLINE_IMPLEMENTATION_REPORT.md",
+          "size": 3821,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SECURITY_ASSESSMENT_REPORT.md",
+          "size": 5836,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SECURITY_FIXES_IMPLEMENTATION_REPORT.md",
+          "size": 6006,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SECURITY_FIX_REPORT.md",
+          "size": 4386,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SIMPLE_COPY_SOLUTION.md",
+          "size": 2656,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "STEP_BY_STEP_VISUAL.md",
+          "size": 4390,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "STORAGE_CONFLICTS_ANALYSIS.md",
+          "size": 5966,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "STORAGE_CONFLICTS_FINAL_RESOLUTION_REPORT.md",
+          "size": 4272,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SYNC_ENHANCEMENT_REPORT.md",
+          "size": 7188,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SYNC_UNIFICATION_COMPLETED.md",
+          "size": 3353,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SYSTEM_COMPATIBILITY_VERIFICATION_REPORT.md",
+          "size": 5383,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SYSTEM_STATUS_FINAL_REPORT.md",
+          "size": 3361,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "SYSTEM_UPGRADE_COMPLETED.md",
+          "size": 8342,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "TAIZ_DAIRY_DUPLICATION_PLAN.md",
+          "size": 4442,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "TRANSPARENT_BACKGROUND_AUDIT_REPORT.md",
+          "size": 5256,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "UNIFIED_OFFLINE_SYSTEM_COMPLETION_REPORT.md",
+          "size": 8618,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "USER_CREDENTIALS_LIST.md",
+          "size": 3825,
+          "reason": "ملف توثيق قديم"
+        },
+        {
+          "name": "offline_system_cleanup_plan.md",
+          "size": 1132,
+          "reason": "ملف توثيق قديم"
+        }
+      ]
+    },
+    "temporaryFiles": {
+      "count": 32,
+      "files": [
+        {
+          "name": "admin_token.txt",
+          "size": 206,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "company7_cleanup_completed.txt",
+          "size": 576,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "company7_cleanup_plan.txt",
+          "size": 1151,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "correct_token.txt",
+          "size": 249,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "correct_user_token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "current_login_response.txt",
+          "size": 370,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "current_token.txt",
+          "size": 174,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "current_user_token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "data_specialist_6_credentials.txt",
+          "size": 26,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "database_cleanup_report.txt",
+          "size": 3047,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "enhanced_general_manager_info.txt",
+          "size": 37,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "final_token.txt",
+          "size": 220,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "fresh_token.txt",
+          "size": 174,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "fresh_user_token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "full_permission_managers_credentials.txt",
+          "size": 1469,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "galal_test_token.txt",
+          "size": 213,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "galal_token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "gm_token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "hsa_group_admin_info.txt",
+          "size": 877,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "independence_audit_report.txt",
+          "size": 2215,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "login_result.json",
+          "size": 45452,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "new_token.txt",
+          "size": 220,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "password_reset_fix_report.txt",
+          "size": 2449,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "password_reset_removal_report.txt",
+          "size": 1975,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "selective_password_reset_implementation_report.txt",
+          "size": 5563,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "super_admin_token.txt",
+          "size": 222,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "supervisor_token.txt",
+          "size": 213,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "test_token.txt",
+          "size": 213,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "token.txt",
+          "size": 0,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "user_galal_token.txt",
+          "size": 174,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "working_token.txt",
+          "size": 249,
+          "reason": "ملف مؤقت"
+        },
+        {
+          "name": "working_token_user.txt",
+          "size": 18,
+          "reason": "ملف مؤقت"
+        }
+      ]
+    },
+    "oldScripts": {
+      "count": 12,
+      "files": [
+        {
+          "name": "backup-system.js",
+          "size": 7251,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "comprehensive-cleanup-system.js",
+          "size": 10715,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "comprehensive-storage-fixer.js",
+          "size": 6736,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "create-templates-company7.js",
+          "size": 7841,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "deep-storage-analysis.js",
+          "size": 8245,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "export-production-data.js",
+          "size": 6834,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "fix-duplicated-patterns.js",
+          "size": 4321,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "fix-storage-conflicts-expert.js",
+          "size": 4868,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "fix-storage-conflicts.js",
+          "size": 4058,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "force_data_specialist_login.js",
+          "size": 1058,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "quick-backup.js",
+          "size": 2542,
+          "reason": "سكريبت قديم"
+        },
+        {
+          "name": "setup-enhanced-general-manager.js",
+          "size": 2666,
+          "reason": "سكريبت قديم"
+        }
+      ]
+    },
+    "unusedAssets": {
+      "count": 0,
+      "files": []
+    },
+    "codeFiles": {
+      "pages": [
+        {
+          "name": "About.tsx",
+          "used": false,
+          "size": 6564,
+          "path": "client/src/pages/About.tsx"
+        },
+        {
+          "name": "InteractiveKpiDashboard.tsx",
+          "used": false,
+          "size": 19713,
+          "path": "client/src/pages/InteractiveKpiDashboard.tsx"
+        },
+        {
+          "name": "KpiDashboard.tsx",
+          "used": false,
+          "size": 742,
+          "path": "client/src/pages/KpiDashboard.tsx"
+        },
+        {
+          "name": "advanced-checklist-manager.tsx",
+          "used": false,
+          "size": 63588,
+          "path": "client/src/pages/advanced-checklist-manager.tsx"
+        },
+        {
+          "name": "assessment-locations.tsx",
+          "used": false,
+          "size": 23160,
+          "path": "client/src/pages/assessment-locations.tsx"
+        },
+        {
+          "name": "backup-manager.tsx",
+          "used": false,
+          "size": 132,
+          "path": "client/src/pages/backup-manager.tsx"
+        },
+        {
+          "name": "checklist-manager.tsx",
+          "used": false,
+          "size": 45950,
+          "path": "client/src/pages/checklist-manager.tsx"
+        },
+        {
+          "name": "dashboard.tsx",
+          "used": false,
+          "size": 16956,
+          "path": "client/src/pages/dashboard.tsx"
+        },
+        {
+          "name": "enhanced-checklist-manager-simple.tsx",
+          "used": false,
+          "size": 30052,
+          "path": "client/src/pages/enhanced-checklist-manager-simple.tsx"
+        },
+        {
+          "name": "enhanced-checklist-manager.tsx",
+          "used": false,
+          "size": 27397,
+          "path": "client/src/pages/enhanced-checklist-manager.tsx"
+        },
+        {
+          "name": "enhanced-dashboard.tsx",
+          "used": false,
+          "size": 14407,
+          "path": "client/src/pages/enhanced-dashboard.tsx"
+        },
+        {
+          "name": "enhanced-general-manager-dashboard.tsx",
+          "used": false,
+          "size": 5673,
+          "path": "client/src/pages/enhanced-general-manager-dashboard.tsx"
+        },
+        {
+          "name": "enhanced-location-checklist.tsx",
+          "used": false,
+          "size": 22202,
+          "path": "client/src/pages/enhanced-location-checklist.tsx"
+        },
+        {
+          "name": "enhanced-login.tsx",
+          "used": true,
+          "size": 15553,
+          "path": "client/src/pages/enhanced-login.tsx"
+        },
+        {
+          "name": "location-checklist.tsx",
+          "used": false,
+          "size": 76786,
+          "path": "client/src/pages/location-checklist.tsx"
+        },
+        {
+          "name": "location-management.tsx",
+          "used": false,
+          "size": 31645,
+          "path": "client/src/pages/location-management.tsx"
+        },
+        {
+          "name": "locations.tsx",
+          "used": false,
+          "size": 24071,
+          "path": "client/src/pages/locations.tsx"
+        },
+        {
+          "name": "login-old.tsx",
+          "used": false,
+          "size": 20353,
+          "path": "client/src/pages/login-old.tsx"
+        },
+        {
+          "name": "login.tsx",
+          "used": true,
+          "size": 22038,
+          "path": "client/src/pages/login.tsx"
+        },
+        {
+          "name": "mobile-login.tsx",
+          "used": true,
+          "size": 10649,
+          "path": "client/src/pages/mobile-login.tsx"
+        },
+        {
+          "name": "not-found.tsx",
+          "used": false,
+          "size": 711,
+          "path": "client/src/pages/not-found.tsx"
+        },
+        {
+          "name": "profile.tsx",
+          "used": false,
+          "size": 22415,
+          "path": "client/src/pages/profile.tsx"
+        },
+        {
+          "name": "reports.tsx",
+          "used": false,
+          "size": 58580,
+          "path": "client/src/pages/reports.tsx"
+        },
+        {
+          "name": "super-admin-dashboard.tsx",
+          "used": false,
+          "size": 18812,
+          "path": "client/src/pages/super-admin-dashboard.tsx"
+        },
+        {
+          "name": "system-settings.tsx",
+          "used": false,
+          "size": 14637,
+          "path": "client/src/pages/system-settings.tsx"
+        },
+        {
+          "name": "test-login.tsx",
+          "used": true,
+          "size": 3026,
+          "path": "client/src/pages/test-login.tsx"
+        },
+        {
+          "name": "user-dashboard.tsx",
+          "used": false,
+          "size": 7494,
+          "path": "client/src/pages/user-dashboard.tsx"
+        },
+        {
+          "name": "user-management.tsx",
+          "used": false,
+          "size": 66589,
+          "path": "client/src/pages/user-management.tsx"
+        },
+        {
+          "name": "users.tsx",
+          "used": false,
+          "size": 55431,
+          "path": "client/src/pages/users.tsx"
+        },
+        {
+          "name": "users_backup.tsx",
+          "used": false,
+          "size": 55431,
+          "path": "client/src/pages/users_backup.tsx"
+        }
+      ],
+      "components": [],
+      "serverFiles": [],
+      "utilities": []
+    }
+  },
+  "recommendations": [
+    "أرشفة الملفات التوثيقية القديمة",
+    "حذف الملفات المؤقتة وملفات الاختبار",
+    "إزالة السكريپتات القديمة غير المستخدمة",
+    "إنشاء نظام تنظيف دوري كل 3 أشهر"
+  ]
+}

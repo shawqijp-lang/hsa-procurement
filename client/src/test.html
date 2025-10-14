@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .test-box { 
+            background: red; 
+            color: white; 
+            padding: 20px; 
+            margin: 20px; 
+            border: 5px solid yellow;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 HSA Test Page</h1>
+    <div class="test-box">
+        🚨 إذا كنت ترى هذا فالخادم يعمل!
+        <br>Timestamp: <?php echo time(); ?>
+        <br>Current Time: <span id="time"></span>
+    </div>
+    <script>
+        document.getElementById('time').innerHTML = new Date().toString();
+    </script>
+</body>
+</html>

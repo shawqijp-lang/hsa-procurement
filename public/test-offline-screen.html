@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الشاشة البيضاء في وضع عدم الاتصال</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            direction: rtl;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .test-section {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .btn {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            color: #1f2937;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4); }
+        .offline-btn {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+        }
+        .online-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        .log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        .online { background: #d1fae5; color: #065f46; }
+        .offline { background: #fee2e2; color: #991b1b; }
+        .warning { background: #fef3c7; color: #92400e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 اختبار الشاشة البيضاء في وضع عدم الاتصال</h1>
+        
+        <div class="status" id="connectionStatus">⏳ فحص حالة الاتصال...</div>
+        
+        <div class="test-section">
+            <h3>🎯 محاكاة مشكلة الشاشة البيضاء</h3>
+            <p>هذا الاختبار يحاكي المنطق الموجود في App.tsx لفهم مشكلة الشاشة البيضاء</p>
+            <button class="btn" onclick="testAppLogic()">🔍 اختبار منطق التطبيق</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📱 محاكاة حالات الاتصال</h3>
+            <button class="btn offline-btn" onclick="simulateOfflineMode()">📵 محاكاة وضع عدم الاتصال</button>
+            <button class="btn online-btn" onclick="simulateOnlineMode()">🌐 محاكاة وضع الاتصال</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔧 إدارة بيانات التخزين</h3>
+            <button class="btn" onclick="checkStoredData()">📋 فحص البيانات المخزنة</button>
+            <button class="btn" onclick="createTestCredentials()">🔑 إنشاء بيانات اختبار</button>
+            <button class="btn" onclick="clearAllStorage()">🗑️ مسح جميع البيانات</button>
+        </div>
+        
+        <button class="btn" onclick="clearLog()">🗑️ مسح السجل</button>
+        
+        <div class="log" id="log">📝 سجل اختبار الشاشة البيضاء:\n</div>
+    </div>
+
+    <script>
+        let isOfflineSimulated = false;
+        let hasToken = false;
+        let hasUser = false;
+
+        function log(message) {
+            const logEl = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString('ar-EG');
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(message);
+        }
+
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const actuallyOffline = isOfflineSimulated || !navigator.onLine;
+            
+            if (actuallyOffline) {
+                statusEl.className = 'status offline';
+                statusEl.textContent = '❌ غير متصل (محاكاة: ' + isOfflineSimulated + ')';
+            } else {
+                statusEl.className = 'status online';
+                statusEl.textContent = '✅ متصل بالإنترنت';
+            }
+        }
+
+        function testAppLogic() {
+            log('🔍 اختبار منطق التطبيق...');
+            
+            // محاكاة بيانات useAuth
+            const isAuthenticated = hasToken && hasUser;
+            const user = hasUser ? { username: 'test_user' } : null;
+            const isOffline = isOfflineSimulated;
+            
+            log('📊 حالة الاستيثاق الحالية:');
+            log('  - isAuthenticated: ' + isAuthenticated);
+            log('  - user: ' + (user ? user.username : 'null'));
+            log('  - isOffline: ' + isOffline);
+            
+            // محاكاة useEffect في App.tsx
+            log('🚀 محاكاة App: Initializing...');
+            
+            // فحص الاستيثاق المسبق
+            if (isAuthenticated && user) {
+                log('✅ محاكاة App: User already authenticated via offline auth');
+                log('📺 النتيجة: عرض التطبيق المستيثق');
+                return;
+            }
+            
+            // فحص التوكين
+            const token = localStorage.getItem('token');
+            log('🔑 محاكاة App: Token in storage: ' + !!token);
+            log('🌐 محاكاة App: Online status: ' + navigator.onLine);
+            log('📱 محاكاة App: isOffline from hook: ' + isOffline);
+            
+            if (token) {
+                // وضع عدم الاتصال
+                if (isOffline || !navigator.onLine) {
+                    log('📱 محاكاة App: Offline mode - using stored credentials');
+                    const storedUser = localStorage.getItem('user');
+                    
+                    if (storedUser) {
+                        try {
+                            const userData = JSON.parse(storedUser);
+                            log('✅ محاكاة App: Using offline stored user: ' + userData.username);
+                            log('📺 النتيجة: عرض التطبيق المستيثق (وضع عدم الاتصال)');
+                            return;
+                        } catch (error) {
+                            log('❌ محاكاة App: Failed to parse stored user in offline mode');
+                        }
+                    }
+                    
+                    log('📱 محاكاة App: No stored user - showing login in offline mode');
+                    log('📺 النتيجة: عرض شاشة تسجيل الدخول');
+                    return;
+                }
+                
+                // وضع الاتصال
+                log('🔍 محاكاة App: Online mode - verifying token...');
+                log('📺 النتيجة: محاولة التحقق من التوكين (قد تفشل وتؤدي لمسح البيانات)');
+            } else {
+                log('🔍 محاكاة App: No token found, showing login');
+                log('📺 النتيجة: عرض شاشة تسجيل الدخول');
+            }
+        }
+
+        function simulateOfflineMode() {
+            isOfflineSimulated = true;
+            log('📵 تم تفعيل محاكاة وضع عدم الاتصال');
+            updateConnectionStatus();
+        }
+
+        function simulateOnlineMode() {
+            isOfflineSimulated = false;
+            log('🌐 تم إلغاء محاكاة وضع عدم الاتصال');
+            updateConnectionStatus();
+        }
+
+        function checkStoredData() {
+            log('📋 فحص البيانات المخزنة...');
+            
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            hasToken = !!token;
+            hasUser = !!user;
+            
+            log('🔑 التوكين: ' + (token ? 'موجود (' + token.substring(0, 20) + '...)' : 'غير موجود'));
+            log('👤 بيانات المستخدم: ' + (user ? 'موجودة' : 'غير موجودة'));
+            
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    log('📝 اسم المستخدم: ' + userData.username);
+                    log('🏷️ الدور: ' + userData.role);
+                } catch (error) {
+                    log('❌ خطأ في تحليل بيانات المستخدم: ' + error.message);
+                }
+            }
+        }
+
+        function createTestCredentials() {
+            log('🔑 إنشاء بيانات اختبار...');
+            
+            const testToken = 'test_token_' + Date.now();
+            const testUser = {
+                id: 1,
+                username: 'test_user',
+                fullName: 'مستخدم تجريبي',
+                role: 'admin'
+            };
+            
+            localStorage.setItem('token', testToken);
+            localStorage.setItem('user', JSON.stringify(testUser));
+            
+            hasToken = true;
+            hasUser = true;
+            
+            log('✅ تم إنشاء بيانات الاختبار');
+            log('🔑 التوكين: ' + testToken);
+            log('👤 المستخدم: ' + testUser.username);
+        }
+
+        function clearAllStorage() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            hasToken = false;
+            hasUser = false;
+            log('🗑️ تم مسح جميع بيانات التخزين');
+        }
+
+        function clearLog() {
+            document.getElementById('log').textContent = '📝 سجل اختبار الشاشة البيضاء:\n';
+        }
+
+        // الأحداث
+        window.addEventListener('online', () => {
+            log('🌐 تم استعادة الاتصال الفعلي');
+            updateConnectionStatus();
+        });
+
+        window.addEventListener('offline', () => {
+            log('📱 انقطع الاتصال الفعلي');
+            updateConnectionStatus();
+        });
+
+        // التهيئة
+        log('✅ تم تحميل صفحة اختبار الشاشة البيضاء');
+        updateConnectionStatus();
+        checkStoredData();
+        
+        setTimeout(() => {
+            log('ℹ️ جاهز لاختبار مشكلة الشاشة البيضاء');
+            log('📋 الهدف: فهم سبب عدم ظهور شاشة تسجيل الدخول في وضع عدم الاتصال');
+        }, 500);
+    </script>
+</body>
+</html>

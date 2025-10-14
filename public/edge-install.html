@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تثبيت تطبيق HSA EVALUATE</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            direction: rtl;
+        }
+        .install-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: #fbbf24;
+            border-radius: 25px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .install-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        .install-btn:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+        .features {
+            text-align: right;
+            margin: 30px 0;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 16px;
+            color: #4b5563;
+        }
+        .feature-icon {
+            margin-left: 10px;
+            font-size: 20px;
+        }
+        .instructions {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: right;
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="install-container">
+        <div class="app-icon">🏢</div>
+        <h1>HSA EVALUATE</h1>
+        <div class="subtitle">نظام تقييم بيئة العمل المتطور</div>
+        
+        <button class="install-btn" onclick="installApp()">
+            📱 تثبيت التطبيق الآن
+        </button>
+        
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                <span>عمل سريع بدون انترنت</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔒</span>
+                <span>حفظ آمن للبيانات المحلية</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🖥️</span>
+                <span>تجربة تطبيق أصلي على الكمبيوتر</span>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📊</span>
+                <span>تقارير ذكية وتحليلات متقدمة</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <strong>طريقة التثبيت في Edge:</strong><br>
+            1. اضغط على زر "تثبيت التطبيق الآن" أعلاه<br>
+            2. أو اضغط على أيقونة التثبيت (➕) في شريط العناوين<br>
+            3. اختر "تثبيت" في النافذة المنبثقة<br>
+            4. سيظهر التطبيق في قائمة البداية كتطبيق أصلي<br>
+            <br>
+            <strong>ملاحظة:</strong> بعد التثبيت، يمكنك الوصول للتطبيق من الشاشة الرئيسية أو قائمة البداية دون الحاجة لفتح المتصفح.
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt;
+        
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('Install prompt available');
+        });
+        
+        async function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('App installed successfully');
+                    showSuccess();
+                } else {
+                    console.log('App installation dismissed');
+                    showManualInstructions();
+                }
+                deferredPrompt = null;
+            } else {
+                showManualInstructions();
+            }
+        }
+        
+        function showSuccess() {
+            document.querySelector('.install-container').innerHTML = `
+                <div class="app-icon">✅</div>
+                <h1>تم التثبيت بنجاح!</h1>
+                <div class="subtitle">يمكنك الآن استخدام التطبيق من الشاشة الرئيسية</div>
+                <button class="install-btn" onclick="window.close()">إغلاق</button>
+            `;
+        }
+        
+        function showManualInstructions() {
+            alert('لتثبيت التطبيق يدوياً:\\n\\n' +
+                  '1. اضغط على النقاط الثلاث (⋯) في Edge\\n' +
+                  '2. اختر "التطبيقات" > "تثبيت هذا الموقع كتطبيق"\\n' +
+                  '3. اختر "تثبيت" في النافذة المنبثقة');
+        }
+        
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            document.querySelector('.install-container').innerHTML = `
+                <div class="app-icon">🏢</div>
+                <h1>التطبيق مثبت مسبقاً!</h1>
+                <div class="subtitle">أنت تستخدم النسخة المثبتة من التطبيق</div>
+                <button class="install-btn" onclick="window.location.href='/'">انتقل للتطبيق</button>
+            `;
+        }
+    </script>
+</body>
+</html>

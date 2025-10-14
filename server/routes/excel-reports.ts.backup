@@ -1,0 +1,879 @@
+/**
+ * 📊 مسارات تقارير Excel محدثة - نظام HSA
+ * تقارير التقييمات اليومية مع التعليقات والفلترة الشاملة
+ */
+
+import express from 'express';
+import ExcelJS from 'exceljs';
+import { db } from '../db';
+import { dailyChecklists, checklistTemplates, users, locations, companies } from '../../shared/schema';
+import { eq, and, gte, lte, inArray, desc } from 'drizzle-orm';
+import jwt from 'jsonwebtoken';
+import { storage } from '../storage';
+
+const router = express.Router();
+
+// Enhanced security: No fallback for production
+const JWT_SECRET = process.env.JWT_SECRET || (() => {
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('JWT_SECRET must be set in production environment');
+  }
+  return "dev-secret-key-2025"; // Only for development
+})();
+
+// Authentication middleware
+async function authenticateToken(req: any, res: any, next: any) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access token required' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as any;
+    const userId = decoded.id || decoded.userId;
+    
+    if (!userId) {
+      return res.status(403).json({ message: 'Invalid token format' });
+    }
+    
+    const user = await storage.getUser(userId);
+    if (!user || !user.isActive) {
+      return res.status(401).json({ message: 'User not found or inactive' });
+    }
+    
+    req.user = user;
+    req.userCompanyId = user.companyId;
+    next();
+  } catch (error) {
+    return res.status(403).json({ message: 'Invalid token' });
+  }
+}
+
+/**
+ * 📊 تقرير Excel للتقييمات اليومية - محدث 2025
+ */
+router.get('/evaluations', authenticateToken, async (req: any, res) => {
+  try {
+    console.log('📊 إنشاء تقرير Excel للتقييمات اليومية...');
+    
+    const {
+      startDate,
+      endDate,
+      locationId,
+      userId,
+      companyId
+    } = req.query;
+    
+    const currentUser = req.user;
+    const userCompanyId = currentUser.companyId;
+    
+    // بناء شروط الفلترة الأساسية
+    const conditions = [];
+    
+    // فلترة حسب شركة المستخدم (أمان أساسي)
+    if (currentUser.role !== 'general_manager') {
+      conditions.push(eq(dailyChecklists.companyId, userCompanyId));
+    } else if (companyId && companyId !== 'all') {
+      conditions.push(eq(dailyChecklists.companyId, parseInt(companyId)));
+    }
+    
+    // فلترة التاريخ
+    if (startDate) {
+      conditions.push(gte(dailyChecklists.checklistDate, startDate));
+    }
+    if (endDate) {
+      conditions.push(lte(dailyChecklists.checklistDate, endDate));
+    }
+    
+    // فلترة الموقع
+    if (locationId && locationId !== 'all') {
+      conditions.push(eq(dailyChecklists.locationId, parseInt(locationId)));
+    }
+    
+    // فلترة المستخدم
+    if (userId && userId !== 'all') {
+      conditions.push(eq(dailyChecklists.userId, parseInt(userId)));
+    }
+
+    // جلب البيانات من قاعدة البيانات
+    const evaluationsData = await db
+      .select({
+        evaluation: dailyChecklists,
+        user: users,
+        location: locations,
+        company: companies
+      })
+      .from(dailyChecklists)
+      .leftJoin(users, eq(dailyChecklists.userId, users.id))
+      .leftJoin(locations, eq(dailyChecklists.locationId, locations.id))
+      .leftJoin(companies, eq(dailyChecklists.companyId, companies.id))
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(dailyChecklists.checklistDate), desc(dailyChecklists.id));
+
+    // جلب جميع قوالب القوائم للحصول على أسماء المهام
+    const allTemplates = await db
+      .select()
+      .from(checklistTemplates);
+
+    // إنشاء خريطة للوصول السريع للقوالب
+    const templatesMap = new Map();
+    allTemplates.forEach(template => {
+      templatesMap.set(template.id, template);
+    });
+
+    // إنشاء ملف Excel جديد
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'نظام HSA لإدارة بيئة العمل';
+    workbook.lastModifiedBy = currentUser.fullName || currentUser.username;
+    workbook.created = new Date();
+
+    // إنشاء ورقة العمل الأولى: ملخص البيانات
+    const summarySheet = workbook.addWorksheet('ملخص التقييمات', {
+      pageSetup: { orientation: 'landscape', paperSize: 9 }
+    });
+
+    // تنسيق الهيدر الرئيسي
+    summarySheet.mergeCells('A1:G2');
+    const headerCell = summarySheet.getCell('A1');
+    headerCell.value = `تقرير التقييمات اليومية - نظام هائل سعيد أنعم وشركاه`;
+    headerCell.font = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
+    headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD700' } };
+    headerCell.alignment = { vertical: 'middle', horizontal: 'center' };
+    headerCell.border = {
+      top: { style: 'thick' },
+      left: { style: 'thick' },
+      bottom: { style: 'thick' },
+      right: { style: 'thick' }
+    };
+
+    // معلومات التقرير
+    summarySheet.getCell('A4').value = 'تاريخ إنشاء التقرير:';
+    summarySheet.getCell('B4').value = new Date().toLocaleDateString('ar-EG', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      calendar: 'gregory' 
+    });
+    
+    summarySheet.getCell('A5').value = 'تم إنشاؤه بواسطة:';
+    summarySheet.getCell('B5').value = currentUser.fullName || currentUser.username;
+    
+    if (startDate || endDate) {
+      summarySheet.getCell('A6').value = 'فترة التقرير:';
+      summarySheet.getCell('B6').value = `من ${startDate || 'غير محدد'} إلى ${endDate || 'غير محدد'}`;
+    }
+
+    // عدد السجلات
+    summarySheet.getCell('A8').value = 'إجمالي عدد التقييمات:';
+    summarySheet.getCell('B8').value = evaluationsData.length;
+    summarySheet.getCell('B8').font = { bold: true, color: { argb: '0066CC' } };
+
+    // إنشاء ورقة العمل الثانية: البيانات التفصيلية
+    const detailSheet = workbook.addWorksheet('البيانات التفصيلية');
+
+    // عناوين الأعمدة للبيانات التفصيلية
+    const headers = [
+      'التاريخ',
+      'وقت التقييم', 
+      'الموقع',
+      'المستخدم',
+      'الشركة',
+      'اسم المهمة',
+      'ملاحظات التقييم'
+    ];
+
+    // إضافة عناوين الأعمدة
+    headers.forEach((header, index) => {
+      const cell = detailSheet.getCell(1, index + 1);
+      cell.value = header;
+      cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '4472C4' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+    });
+
+    // إضافة البيانات
+    let currentRow = 2; // البدء من الصف الثاني بعد العناوين
+
+    for (const row of evaluationsData) {
+      const evaluation = row.evaluation;
+      const user = row.user;
+      const location = row.location;
+      const company = row.company;
+      
+      // معالجة بيانات المهام
+      let tasks = [];
+      try {
+        if (evaluation.tasks && typeof evaluation.tasks === 'string') {
+          tasks = JSON.parse(evaluation.tasks);
+        } else if (Array.isArray(evaluation.tasks)) {
+          tasks = evaluation.tasks;
+        }
+      } catch (error) {
+        console.error('خطأ في معالجة بيانات المهام:', error);
+        tasks = [];
+      }
+
+      // تنسيق وقت التقييم
+      const evaluationTime = evaluation.createdAt 
+        ? new Date(evaluation.createdAt).toLocaleTimeString('ar-EG', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false 
+          })
+        : 'غير محدد';
+
+      // إذا لم توجد مهام، اعرض صف واحد فقط
+      if (tasks.length === 0) {
+        const rowData = [
+          evaluation.checklistDate,
+          evaluationTime,
+          location?.nameAr || 'غير محدد',
+          user?.fullName || user?.username || 'غير محدد',
+          company?.nameAr || 'غير محدد',
+          'لا توجد مهام',
+          evaluation.evaluationNotes || ''
+        ];
+
+        rowData.forEach((data, colIndex) => {
+          const cell = detailSheet.getCell(currentRow, colIndex + 1);
+          cell.value = data;
+          cell.alignment = { horizontal: 'center', vertical: 'middle' };
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+        currentRow++;
+      } else {
+        // عرض كل مهمة في صف منفصل
+        tasks.forEach((task: any, taskIndex: number) => {
+          const isFirstTask = taskIndex === 0;
+          
+          // الحصول على معلومات المهمة من القالب
+          const template = templatesMap.get(task.templateId);
+          let taskName = 'مهمة غير محددة';
+          
+          if (template) {
+            taskName = template.nameAr || template.name || 'مهمة غير محددة';
+          }
+          
+          // التحقق من وجود تقييمات فرعية
+          if (task.subTaskRatings && Array.isArray(task.subTaskRatings) && task.subTaskRatings.length > 0) {
+            // عرض كل مهمة فرعية في صف منفصل
+            task.subTaskRatings.forEach((subTask: any, subTaskIndex: number) => {
+              const isFirstSubTask = subTaskIndex === 0;
+              const isFirstOverall = isFirstTask && isFirstSubTask;
+              
+              const rowData = [
+                isFirstOverall ? evaluation.checklistDate : '', // التاريخ فقط في المهمة الأولى
+                isFirstOverall ? evaluationTime : '', // الوقت فقط في المهمة الأولى
+                isFirstOverall ? (location?.nameAr || 'غير محدد') : '', // الموقع فقط في المهمة الأولى
+                isFirstOverall ? (user?.fullName || user?.username || 'غير محدد') : '', // المستخدم فقط في المهمة الأولى
+                isFirstOverall ? (company?.nameAr || 'غير محدد') : '', // الشركة فقط في المهمة الأولى
+                isFirstSubTask ? taskName : '', // اسم المهمة الرئيسية في المهمة الفرعية الأولى فقط
+                (taskIndex === 0 && subTaskIndex === 0) ? (evaluation.evaluationNotes || '') : '' // الملاحظات فقط في المهمة الأولى
+              ];
+
+              rowData.forEach((data, colIndex) => {
+                const cell = detailSheet.getCell(currentRow, colIndex + 1);
+                cell.value = data;
+                cell.alignment = { horizontal: 'center', vertical: 'middle' };
+                cell.border = {
+                  top: { style: 'thin' },
+                  left: { style: 'thin' },
+                  bottom: { style: 'thin' },
+                  right: { style: 'thin' }
+                };
+              });
+              currentRow++;
+            });
+          } else {
+            // عرض المهمة العادية (بدون مهام فرعية)
+            let evaluationCriteria = '-';
+            
+            if (template) {
+              if (template.subPoints && Array.isArray(template.subPoints) && template.subPoints.length > 0) {
+                evaluationCriteria = template.subPoints.map((point: any) => 
+                  point.ar || point.nameAr || point.name || 'بند غير محدد'
+                ).join(' | ');
+              } else if (template.multiTasks && Array.isArray(template.multiTasks) && template.multiTasks.length > 0) {
+                evaluationCriteria = template.multiTasks.map((multiTask: any) => 
+                  multiTask.ar || multiTask.nameAr || multiTask.name || 'مهمة متعددة غير محددة'
+                ).join(' | ');
+              } else if (template.subTasks && Array.isArray(template.subTasks) && template.subTasks.length > 0) {
+                evaluationCriteria = template.subTasks.map((subTask: any) => 
+                  subTask.ar || subTask.nameAr || subTask.name || 'مهمة فرعية غير محددة'
+                ).join(' | ');
+              } else if (template.category) {
+                evaluationCriteria = template.category;
+              }
+            }
+            
+            // حساب متوسط التقييم للمهمة
+            let taskRating = task.rating || '0';
+            if (task.subTaskRatings && Array.isArray(task.subTaskRatings) && task.subTaskRatings.length > 0) {
+              const totalRating = task.subTaskRatings.reduce((sum: number, subTask: any) => sum + (subTask.rating || 0), 0);
+              taskRating = task.subTaskRatings.length > 0 ? (totalRating / task.subTaskRatings.length).toFixed(1) : '0';
+            }
+            
+            const rowData = [
+              isFirstTask ? evaluation.checklistDate : '', // التاريخ فقط في المهمة الأولى
+              isFirstTask ? evaluationTime : '', // الوقت فقط في المهمة الأولى
+              isFirstTask ? (location?.nameAr || 'غير محدد') : '', // الموقع فقط في المهمة الأولى
+              isFirstTask ? (user?.fullName || user?.username || 'غير محدد') : '', // المستخدم فقط في المهمة الأولى
+              isFirstTask ? (company?.nameAr || 'غير محدد') : '', // الشركة فقط في المهمة الأولى
+              taskName,
+              taskIndex === 0 ? (evaluation.evaluationNotes || '') : '' // الملاحظات فقط في المهمة الأولى
+            ];
+
+            rowData.forEach((data, colIndex) => {
+              const cell = detailSheet.getCell(currentRow, colIndex + 1);
+              cell.value = data;
+              cell.alignment = { horizontal: 'center', vertical: 'middle' };
+              cell.border = {
+                top: { style: 'thin' },
+                left: { style: 'thin' },
+                bottom: { style: 'thin' },
+                right: { style: 'thin' }
+              };
+
+              // تلوين مشروط لمتوسط التقييم
+              if (colIndex === 5) { // عمود التقييم/المهمة
+                const rating = parseFloat(taskRating);
+                if (rating >= 4) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'C6EFCE' } };
+                } else if (rating >= 3) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFEB9C' } };
+                } else if (rating > 0) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFC7CE' } };
+                }
+              }
+            });
+            currentRow++;
+          }
+        });
+      }
+    }
+
+    // تعديل عرض الأعمدة
+    detailSheet.columns = [
+      { width: 15 }, // التاريخ
+      { width: 12 }, // وقت التقييم
+      { width: 25 }, // الموقع
+      { width: 20 }, // المستخدم
+      { width: 20 }, // الشركة
+      { width: 30 }, // اسم المهمة
+      { width: 30 }  // ملاحظات
+    ];
+
+    // إعداد الاستجابة
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="evaluations_report_${new Date().toISOString().split('T')[0]}.xlsx"`);
+
+    // إرسال الملف
+    await workbook.xlsx.write(res);
+    res.end();
+
+    console.log(`✅ تم إنشاء تقرير Excel بنجاح - ${evaluationsData.length} سجل`);
+
+  } catch (error) {
+    console.error('❌ خطأ في إنشاء تقرير Excel:', error);
+    res.status(500).json({ 
+      message: 'فشل في إنشاء التقرير',
+      error: process.env.NODE_ENV === 'development' ? (error as Error).message : 'خطأ داخلي'
+    });
+  }
+});
+
+/**
+ * 📋 الحصول على قائمة المواقع للفلترة
+ */
+router.get('/filter-locations/:companyId', authenticateToken, async (req: any, res) => {
+  try {
+    const { companyId } = req.params;
+    const currentUser = req.user;
+    
+    let conditions = [];
+    
+    if (currentUser.role !== 'general_manager') {
+      conditions.push(eq(locations.companyId, currentUser.companyId));
+    } else if (companyId !== 'all') {
+      conditions.push(eq(locations.companyId, parseInt(companyId)));
+    }
+    
+    const locationsList = await db
+      .select({
+        id: locations.id,
+        nameAr: locations.nameAr,
+        icon: locations.icon
+      })
+      .from(locations)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(locations.nameAr);
+    
+    res.json(locationsList);
+  } catch (error) {
+    console.error('خطأ في جلب قائمة المواقع:', error);
+    res.status(500).json({ message: 'فشل في جلب قائمة المواقع' });
+  }
+});
+
+/**
+ * 👥 الحصول على قائمة المستخدمين للفلترة
+ */
+router.get('/filter-users/:companyId', authenticateToken, async (req: any, res) => {
+  try {
+    const { companyId } = req.params;
+    const currentUser = req.user;
+    
+    let conditions = [];
+    
+    if (currentUser.role !== 'general_manager') {
+      conditions.push(eq(users.companyId, currentUser.companyId));
+    } else if (companyId !== 'all') {
+      conditions.push(eq(users.companyId, parseInt(companyId)));
+    }
+    
+    const usersList = await db
+      .select({
+        id: users.id,
+        username: users.username,
+        fullName: users.fullName
+      })
+      .from(users)
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(users.fullName);
+    
+    res.json(usersList);
+  } catch (error) {
+    console.error('خطأ في جلب قائمة المستخدمين:', error);
+    res.status(500).json({ message: 'فشل في جلب قائمة المستخدمين' });
+  }
+});
+
+/**
+ * 📊 تقرير تفاصيل تقييم المواقع بالكامل
+ */
+router.get('/location-details', authenticateToken, async (req: any, res) => {
+  try {
+    console.log('📊 إنشاء تقرير تفاصيل تقييم المواقع...');
+    
+    const currentUser = req.user;
+    const userCompanyId = currentUser.companyId;
+    
+    // جلب جميع قوالب القوائم أولاً للفحص
+    const allTemplates = await db.select().from(checklistTemplates);
+    console.log('📊 Total templates in DB:', allTemplates.length);
+    console.log('📊 Sample template IDs and names:', 
+      allTemplates.slice(0, 10).map(t => `ID:${t.id} Name:${t.nameAr || t.name || 'NO_NAME'}`));
+    
+    // إنشاء خريطة للوصول السريع للقوالب  
+    const templatesMap = new Map();
+    allTemplates.forEach(template => {
+      templatesMap.set(template.id, template);
+    });
+    console.log('📊 TemplatesMap created with size:', templatesMap.size);
+    
+    const { startDate, endDate, locationId, userId, companyId } = req.query;
+
+    // بناء شروط الاستعلام
+    let conditions = [];
+    
+    // فلترة حسب شركة المستخدم (أمان أساسي)
+    if (currentUser.role !== 'general_manager') {
+      conditions.push(eq(dailyChecklists.companyId, userCompanyId));
+    } else if (companyId && companyId !== 'all') {
+      conditions.push(eq(dailyChecklists.companyId, parseInt(companyId)));
+    }
+    
+    // فلترة التاريخ
+    if (startDate) {
+      conditions.push(gte(dailyChecklists.checklistDate, startDate));
+    }
+    if (endDate) {
+      conditions.push(lte(dailyChecklists.checklistDate, endDate));
+    }
+    
+    // فلترة الموقع
+    if (locationId && locationId !== 'all') {
+      conditions.push(eq(dailyChecklists.locationId, parseInt(locationId)));
+    }
+    
+    // فلترة المستخدم
+    if (userId && userId !== 'all') {
+      conditions.push(eq(dailyChecklists.userId, parseInt(userId)));
+    }
+
+    // جلب البيانات من قاعدة البيانات
+    const evaluationsData = await db
+      .select({
+        evaluation: dailyChecklists,
+        user: users,
+        location: locations,
+        company: companies
+      })
+      .from(dailyChecklists)
+      .leftJoin(users, eq(dailyChecklists.userId, users.id))
+      .leftJoin(locations, eq(dailyChecklists.locationId, locations.id))
+      .leftJoin(companies, eq(dailyChecklists.companyId, companies.id))
+      .where(conditions.length > 0 ? and(...conditions) : undefined)
+      .orderBy(desc(dailyChecklists.checklistDate), desc(dailyChecklists.id));
+
+    // جلب جميع قوالب القوائم للحصول على أسماء المهام
+    const allTemplates = await db
+      .select()
+      .from(checklistTemplates);
+
+    // إنشاء خريطة للوصول السريع للقوالب
+    const templatesMap = new Map();
+    allTemplates.forEach(template => {
+      templatesMap.set(template.id, template);
+    });
+
+    // إنشاء ملف Excel جديد
+    const workbook = new ExcelJS.Workbook();
+    workbook.creator = 'نظام HSA لإدارة بيئة العمل';
+    workbook.lastModifiedBy = currentUser.fullName || currentUser.username;
+    workbook.created = new Date();
+
+    // إنشاء ورقة العمل: تفاصيل تقييم المواقع
+    const detailSheet = workbook.addWorksheet('تفاصيل تقييم المواقع');
+
+    // تنسيق الهيدر الرئيسي
+    detailSheet.mergeCells('A1:J2');
+    const headerCell = detailSheet.getCell('A1');
+    headerCell.value = `تقرير تفاصيل تقييم المواقع - نظام هائل سعيد أنعم وشركاه`;
+    headerCell.font = { name: 'Arial', size: 16, bold: true, color: { argb: 'FFFFFF' } };
+    headerCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFD700' } };
+    headerCell.alignment = { vertical: 'middle', horizontal: 'center' };
+    headerCell.border = {
+      top: { style: 'thick' },
+      left: { style: 'thick' },
+      bottom: { style: 'thick' },
+      right: { style: 'thick' }
+    };
+
+    // معلومات التقرير
+    detailSheet.getCell('A4').value = 'تاريخ إنشاء التقرير:';
+    detailSheet.getCell('B4').value = new Date().toLocaleDateString('ar-EG', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      calendar: 'gregory' 
+    });
+    
+    detailSheet.getCell('A5').value = 'تم إنشاؤه بواسطة:';
+    detailSheet.getCell('B5').value = currentUser.fullName || currentUser.username;
+    
+    if (startDate || endDate) {
+      detailSheet.getCell('A6').value = 'فترة التقرير:';
+      detailSheet.getCell('B6').value = `من ${startDate || 'غير محدد'} إلى ${endDate || 'غير محدد'}`;
+    }
+
+    // عناوين الأعمدة للبيانات التفصيلية
+    const headers = [
+      'التاريخ',
+      'وقت التقييم',
+      'الموقع', 
+      'المستخدم',
+      'الشركة',
+      'اسم المهمة الرئيسية',
+      'اسم المهمة الفرعية',
+      'التقييم',
+      'مكتملة',
+      'ملاحظات'
+    ];
+
+    // إضافة عناوين الأعمدة في الصف 8
+    headers.forEach((header, index) => {
+      const cell = detailSheet.getCell(8, index + 1);
+      cell.value = header;
+      cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+      cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '4472C4' } };
+      cell.alignment = { horizontal: 'center', vertical: 'middle' };
+      cell.border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' }
+      };
+    });
+
+    let currentRow = 9;
+
+    // إضافة البيانات
+    for (const row of evaluationsData) {
+      const evaluation = row.evaluation;
+      const user = row.user;
+      const location = row.location;
+      const company = row.company;
+      
+      // معالجة بيانات المهام
+      let tasks = [];
+      try {
+        if (evaluation.tasks && typeof evaluation.tasks === 'string') {
+          tasks = JSON.parse(evaluation.tasks);
+        } else if (Array.isArray(evaluation.tasks)) {
+          tasks = evaluation.tasks;
+        }
+      } catch (error) {
+        console.error('خطأ في معالجة بيانات المهام:', error);
+        tasks = [];
+      }
+
+      // تنسيق وقت التقييم
+      const evaluationTime = evaluation.createdAt 
+        ? new Date(evaluation.createdAt).toLocaleTimeString('ar-EG', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: false 
+          })
+        : 'غير محدد';
+
+      // إذا لم توجد مهام، اعرض صف واحد فقط
+      if (tasks.length === 0) {
+        const rowData = [
+          evaluation.checklistDate,
+          evaluationTime,
+          location?.nameAr || 'غير محدد',
+          user?.fullName || user?.username || 'غير محدد',
+          company?.nameAr || 'غير محدد',
+          'لا توجد مهام',
+          '-',
+          '-',
+          '-',
+          evaluation.evaluationNotes || ''
+        ];
+
+        rowData.forEach((data, colIndex) => {
+          const cell = detailSheet.getCell(currentRow, colIndex + 1);
+          cell.value = data;
+          cell.alignment = { horizontal: 'center', vertical: 'middle' };
+          cell.border = {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' }
+          };
+        });
+        currentRow++;
+      } else {
+        // عرض كل مهمة في صف منفصل
+        tasks.forEach((task: any, taskIndex: number) => {
+          const isFirstTask = taskIndex === 0;
+          
+          // الحصول على معلومات المهمة من البيانات المحفوظة أو القالب
+          let taskName = 'مهمة غير محددة';
+          
+          // البحث عن القالب المطابق لـ templateId
+          const template = templatesMap.get(task.templateId);
+          console.log('📊 Looking for template ID:', task.templateId);
+          console.log('📊 Template found:', template ? `${template.nameAr || template.name}` : 'NOT FOUND');
+          
+          if (template) {
+            taskName = template.nameAr || template.name || 'قالب بدون اسم';
+          } else {
+            taskName = `مهمة غير موجودة (ID: ${task.templateId})`;
+          }
+          
+          // التحقق من وجود تقييمات فرعية أو إنشاؤها من القالب
+          let subTasksToDisplay = [];
+          const template = templatesMap.get(task.templateId);
+          
+          if (task.subTaskRatings && Array.isArray(task.subTaskRatings) && task.subTaskRatings.length > 0) {
+            // إذا كانت هناك تقييمات فرعية محفوظة، استخدمها
+            subTasksToDisplay = task.subTaskRatings;
+          } else if (template) {
+            // إنشاء المهام الفرعية من القالب
+            if (template.multiTasks && Array.isArray(template.multiTasks) && template.multiTasks.length > 0) {
+              subTasksToDisplay = template.multiTasks.map((multiTask: any, index: number) => ({
+                taskName: multiTask.ar || multiTask.nameAr || multiTask.name || `مهمة متعددة ${index + 1}`,
+                rating: task.rating || 0,
+                notes: task.notes || ''
+              }));
+            } else if (template.subTasks && Array.isArray(template.subTasks) && template.subTasks.length > 0) {
+              subTasksToDisplay = template.subTasks.map((subTask: any, index: number) => ({
+                taskName: subTask.ar || subTask.nameAr || subTask.name || `مهمة فرعية ${index + 1}`,
+                rating: task.rating || 0,
+                notes: task.notes || ''
+              }));
+            } else if (template.subPoints && Array.isArray(template.subPoints) && template.subPoints.length > 0) {
+              subTasksToDisplay = template.subPoints.map((subPoint: any, index: number) => ({
+                taskName: subPoint.ar || subPoint.nameAr || subPoint.name || `نقطة فرعية ${index + 1}`,
+                rating: task.rating || 0,
+                notes: task.notes || ''
+              }));
+            }
+          }
+          
+          if (subTasksToDisplay.length > 0) {
+            // عرض كل مهمة فرعية في صف منفصل
+            subTasksToDisplay.forEach((subTask: any, subTaskIndex: number) => {
+              const isFirstSubTask = subTaskIndex === 0;
+              const isFirstOverall = isFirstTask && isFirstSubTask;
+              
+              const rowData = [
+                isFirstOverall ? evaluation.checklistDate : '', // التاريخ فقط في المهمة الأولى
+                isFirstOverall ? evaluationTime : '', // الوقت فقط في المهمة الأولى
+                isFirstOverall ? (location?.nameAr || 'غير محدد') : '', // الموقع فقط في المهمة الأولى
+                isFirstOverall ? (user?.fullName || user?.username || 'غير محدد') : '', // المستخدم فقط في المهمة الأولى
+                isFirstOverall ? (company?.nameAr || 'غير محدد') : '', // الشركة فقط في المهمة الأولى
+                isFirstSubTask ? taskName : '', // اسم المهمة الرئيسية
+                subTask.taskName || 'مهمة فرعية غير محددة', // اسم المهمة الفرعية
+                subTask.rating || task.rating || '0', // تقييم المهمة الفرعية
+                (subTask.rating > 0 || task.rating > 0) ? 'نعم' : 'لا', // حالة الإكمال بناء على التقييم
+                (taskIndex === 0 && subTaskIndex === 0) ? (evaluation.evaluationNotes || '') : '' // الملاحظات فقط في المهمة الأولى
+              ];
+
+              rowData.forEach((data, colIndex) => {
+                const cell = detailSheet.getCell(currentRow, colIndex + 1);
+                cell.value = data;
+                cell.alignment = { horizontal: 'center', vertical: 'middle' };
+                cell.border = {
+                  top: { style: 'thin' },
+                  left: { style: 'thin' },
+                  bottom: { style: 'thin' },
+                  right: { style: 'thin' }
+                };
+
+                // تلوين مشروط للتقييم
+                if (colIndex === 7) { // عمود التقييم
+                  const rating = parseFloat(subTask.rating || task.rating || '0');
+                  if (rating >= 4) {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'C6EFCE' } };
+                  } else if (rating >= 3) {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFEB9C' } };
+                  } else if (rating > 0) {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFC7CE' } };
+                  }
+                }
+
+                // تلوين مشروط لحالة الإكمال
+                if (colIndex === 8) { // عمود الإكمال
+                  const rating = parseFloat(subTask.rating || task.rating || '0');
+                  if (rating > 0) {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'C6EFCE' } };
+                  } else {
+                    cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFC7CE' } };
+                  }
+                }
+              });
+              currentRow++;
+            });
+          } else {
+            // عرض المهمة العادية (بدون مهام فرعية)
+            let evaluationCriteria = '-';
+            
+            if (template) {
+              if (template.subPoints && Array.isArray(template.subPoints) && template.subPoints.length > 0) {
+                evaluationCriteria = template.subPoints.map((point: any) => 
+                  point.ar || point.nameAr || point.name || 'بند غير محدد'
+                ).join(' | ');
+              } else if (template.multiTasks && Array.isArray(template.multiTasks) && template.multiTasks.length > 0) {
+                evaluationCriteria = template.multiTasks.map((multiTask: any) => 
+                  multiTask.ar || multiTask.nameAr || multiTask.name || 'مهمة متعددة غير محددة'
+                ).join(' | ');
+              } else if (template.subTasks && Array.isArray(template.subTasks) && template.subTasks.length > 0) {
+                evaluationCriteria = template.subTasks.map((subTask: any) => 
+                  subTask.ar || subTask.nameAr || subTask.name || 'مهمة فرعية غير محددة'
+                ).join(' | ');
+              } else if (template.category) {
+                evaluationCriteria = template.category;
+              }
+            }
+            
+            const rowData = [
+              isFirstTask ? evaluation.checklistDate : '', // التاريخ فقط في المهمة الأولى
+              isFirstTask ? evaluationTime : '', // الوقت فقط في المهمة الأولى
+              isFirstTask ? (location?.nameAr || 'غير محدد') : '', // الموقع فقط في المهمة الأولى
+              isFirstTask ? (user?.fullName || user?.username || 'غير محدد') : '', // المستخدم فقط في المهمة الأولى
+              isFirstTask ? (company?.nameAr || 'غير محدد') : '', // الشركة فقط في المهمة الأولى
+              taskName, // اسم المهمة الرئيسية
+              evaluationCriteria, // اسم المهمة الفرعية (تفاصيل المهمة)
+              task.rating || '0',
+              task.completed ? 'نعم' : 'لا',
+              taskIndex === 0 ? (evaluation.evaluationNotes || '') : '' // الملاحظات فقط في المهمة الأولى
+            ];
+
+            rowData.forEach((data, colIndex) => {
+              const cell = detailSheet.getCell(currentRow, colIndex + 1);
+              cell.value = data;
+              cell.alignment = { horizontal: 'center', vertical: 'middle' };
+              cell.border = {
+                top: { style: 'thin' },
+                left: { style: 'thin' },
+                bottom: { style: 'thin' },
+                right: { style: 'thin' }
+              };
+
+              // تلوين مشروط للتقييم
+              if (colIndex === 7 && task.rating) { // عمود التقييم
+                const rating = parseFloat(task.rating);
+                if (rating >= 4) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'C6EFCE' } };
+                } else if (rating >= 3) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFEB9C' } };
+                } else if (rating > 0) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFC7CE' } };
+                }
+              }
+
+              // تلوين مشروط لحالة الإكمال
+              if (colIndex === 8) { // عمود الإكمال
+                if (task.completed) {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'C6EFCE' } };
+                } else {
+                  cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFC7CE' } };
+                }
+              }
+            });
+            currentRow++;
+          }
+        });
+      }
+    }
+
+    // تعديل عرض الأعمدة
+    detailSheet.columns = [
+      { width: 15 }, // التاريخ
+      { width: 12 }, // وقت التقييم
+      { width: 25 }, // الموقع
+      { width: 20 }, // المستخدم
+      { width: 20 }, // الشركة
+      { width: 30 }, // اسم المهمة الرئيسية
+      { width: 35 }, // اسم المهمة الفرعية
+      { width: 10 }, // التقييم
+      { width: 10 }, // مكتملة
+      { width: 30 }  // ملاحظات
+    ];
+
+    // إعداد الاستجابة
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="location_details_report_${new Date().toISOString().split('T')[0]}.xlsx"`);
+
+    // إرسال الملف
+    await workbook.xlsx.write(res);
+    res.end();
+
+    console.log(`✅ تم إنشاء تقرير تفاصيل المواقع بنجاح - ${evaluationsData.length} تقييم`);
+
+  } catch (error) {
+    console.error('❌ خطأ في إنشاء تقرير تفاصيل المواقع:', error);
+    res.status(500).json({ 
+      message: 'فشل في إنشاء التقرير',
+      error: process.env.NODE_ENV === 'development' ? (error as Error).message : 'خطأ داخلي'
+    });
+  }
+});
+
+export default router;

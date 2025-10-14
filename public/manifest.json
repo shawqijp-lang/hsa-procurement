@@ -1,0 +1,123 @@
+{
+  "name": "نظام إدارة بيئة العمل",
+  "short_name": "HSA إدارة العمل",
+  "description": "نظام إدارة بيئة العمل - هائل سعيد أنعم وشركاه",
+  "version": "6.26.0",
+  "start_url": "/?source=pwa",
+  "id": "com.hsa.evaluate.app",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui",
+    "fullscreen"
+  ],
+  "background_color": "#000000",
+  "background_color_dark": "#111111",
+  "theme_color": "#FFD700",
+  "theme_color_dark": "#B8860B",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "edge_side_panel": {
+    "preferred_width": 400,
+    "title": "نظام إدارة بيئة العمل",
+    "description": "نظام إدارة بيئة العمل - هائل سعيد أنعم وشركاه"
+  },
+  "handle_links": "preferred",
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+hsa",
+      "url": "/?protocol=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/",
+      "accept": {
+        "application/vnd.hsa.evaluate": [
+          ".hsa"
+        ]
+      }
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "دخول محلي",
+      "short_name": "دخول",
+      "description": "دخول سريع بالبيانات المحفوظة",
+      "url": "/login?mode=local",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "التقييم السريع",
+      "short_name": "تقييم",
+      "description": "انتقال مباشر لصفحة التقييم",
+      "url": "/evaluation",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "التقارير",
+      "short_name": "تقارير",
+      "description": "عرض التقارير والإحصائيات",
+      "url": "/reports",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "وضع عدم الاتصال",
+      "short_name": "محلي",
+      "description": "الوصول للبيانات بدون اتصال",
+      "url": "/?offline=true",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

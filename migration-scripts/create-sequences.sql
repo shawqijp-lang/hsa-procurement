@@ -1,0 +1,21 @@
+-- إنشاء sequences في schema production
+CREATE SCHEMA IF NOT EXISTS production;
+
+CREATE SEQUENCE IF NOT EXISTS production.category_comments_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.checklist_templates_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.companies_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.daily_checklists_new_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.dashboard_settings_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.kpi_access_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.locations_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.login_attempts_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.master_evaluations_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.reports_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.security_logs_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.supervisor_assessment_location_permissions_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.supervisor_user_location_permissions_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.system_settings_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.unified_evaluations_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.user_dashboard_settings_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.user_location_permissions_id_seq;
+CREATE SEQUENCE IF NOT EXISTS production.users_id_seq;

@@ -1,0 +1,24 @@
+<svg width="120" height="140" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background rounded rectangle with border -->
+  <rect x="8" y="8" width="104" height="84" rx="12" ry="12" fill="#1a1a1a" stroke="#fbbf24" stroke-width="3"/>
+  
+  <!-- Yellow flowing stripes like in the original logo -->
+  <!-- Top horizontal stripe -->
+  <path d="M15 20 L100 20 Q105 20, 105 25 L105 28 Q105 33, 100 33 L15 33 Q10 33, 10 28 L10 25 Q10 20, 15 20 Z" fill="#fbbf24"/>
+  
+  <!-- First curved flowing stripe -->
+  <path d="M15 35 Q30 30, 50 35 Q70 40, 90 45 Q105 50, 105 55 Q105 60, 90 65 Q70 70, 50 65 Q30 60, 15 55 Q10 50, 15 45 Q15 40, 15 35 Z" fill="#fbbf24"/>
+  
+  <!-- Second curved flowing stripe -->
+  <path d="M15 50 Q35 45, 60 50 Q85 55, 105 60 Q110 65, 105 70 Q100 75, 85 80 Q60 85, 35 80 Q15 75, 10 70 Q10 65, 15 60 Q15 55, 15 50 Z" fill="#fbbf24"/>
+  
+  <!-- Third curved flowing stripe -->
+  <path d="M15 65 Q40 60, 70 65 Q95 70, 105 75 Q110 80, 105 85 Q95 90, 70 85 Q40 80, 15 75 Q10 70, 15 65 Z" fill="#fbbf24"/>
+  
+  <!-- Bottom curved stripe -->
+  <path d="M20 78 Q50 73, 80 78 Q100 83, 105 88 Q100 93, 80 88 Q50 83, 20 88 Q15 83, 20 78 Z" fill="#fbbf24"/>
+  
+  <!-- HSA Text -->
+  <text x="60" y="115" text-anchor="middle" fill="#1a1a1a" font-family="Arial, sans-serif" font-size="20" font-weight="bold">HSA</text>
+  <circle cx="115" cy="115" r="1.5" fill="#1a1a1a"/>
+</svg>
